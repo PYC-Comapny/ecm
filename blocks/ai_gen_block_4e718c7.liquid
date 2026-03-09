@@ -1,0 +1,566 @@
+{% doc %}
+  @prompt
+    Create a newsletter email signup form with these exact features: email input field, submit button, and after successful submission show the message "Use code HEALME20" with a clickable "Copy Code" button next to HEALME20 that copies the code to clipboard and shows a confirmation when clicked. Match the styling and layout of a modern newsletter signup form.
+    
+    make it look exactly likd the design of the newletter thats in there right now
+    
+    funciton = this
+    entersemail clicks get code = then shows code with copy option, it looks fucked uyp
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-newsletter-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 40px 20px;
+  }
+
+  .ai-newsletter-content-{{ ai_gen_id }} {
+    text-align: center;
+  }
+
+  .ai-newsletter-heading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.heading_size }}px;
+    margin: 0 0 8px;
+    color: {{ block.settings.text_color }};
+    font-weight: 700;
+  }
+
+  .ai-newsletter-subtext-{{ ai_gen_id }} {
+    font-size: {{ block.settings.subtext_size }}px;
+    margin: 0 0 24px;
+    color: {{ block.settings.text_color }};
+    opacity: 0.85;
+  }
+
+  .ai-newsletter-form-container-{{ ai_gen_id }} {
+    width: 100%;
+  }
+
+  .ai-newsletter-input-row-{{ ai_gen_id }} {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .ai-newsletter-email-input-{{ ai_gen_id }} {
+    flex: 1;
+    padding: 15px 20px;
+    border: 1px solid {{ block.settings.input_border_color }};
+    border-radius: {{ block.settings.input_radius }}px;
+    font-size: 16px;
+    background-color: {{ block.settings.input_bg_color }};
+    color: {{ block.settings.input_text_color }};
+    font-family: inherit;
+  }
+
+  .ai-newsletter-email-input-{{ ai_gen_id }}::placeholder {
+    color: {{ block.settings.input_text_color }};
+    opacity: 0.5;
+  }
+
+  .ai-newsletter-email-input-{{ ai_gen_id }}:focus {
+    outline: none;
+    border-color: {{ block.settings.button_bg_color }};
+  }
+
+  .ai-newsletter-submit-{{ ai_gen_id }} {
+    padding: 15px 30px;
+    background-color: {{ block.settings.button_bg_color }};
+    color: {{ block.settings.button_text_color }};
+    border: none;
+    border-radius: {{ block.settings.button_radius }}px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    font-family: inherit;
+  }
+
+  .ai-newsletter-submit-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_color }};
+  }
+
+  .ai-newsletter-error-msg-{{ ai_gen_id }} {
+    display: none;
+    color: {{ block.settings.error_color }};
+    font-size: 14px;
+    text-align: left;
+    margin-top: 8px;
+  }
+
+  .ai-newsletter-error-msg-{{ ai_gen_id }}.show {
+    display: block;
+  }
+
+  .ai-newsletter-success-box-{{ ai_gen_id }} {
+    display: none;
+    padding: 30px;
+    background-color: {{ block.settings.success_bg_color }};
+    border-radius: {{ block.settings.input_radius }}px;
+    border: 2px solid {{ block.settings.success_border_color }};
+  }
+
+  .ai-newsletter-success-box-{{ ai_gen_id }}.show {
+    display: block;
+  }
+
+  .ai-newsletter-success-title-{{ ai_gen_id }} {
+    font-size: 20px;
+    color: {{ block.settings.text_color }};
+    font-weight: 600;
+    margin: 0 0 20px;
+  }
+
+  .ai-newsletter-code-box-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    padding: 20px;
+    background-color: {{ block.settings.code_bg_color }};
+    border-radius: {{ block.settings.button_radius }}px;
+    border: 2px dashed {{ block.settings.code_border_color }};
+  }
+
+  .ai-newsletter-code-{{ ai_gen_id }} {
+    font-size: 28px;
+    font-weight: 700;
+    color: {{ block.settings.code_text_color }};
+    letter-spacing: 3px;
+    margin: 0;
+  }
+
+  .ai-newsletter-copy-{{ ai_gen_id }} {
+    padding: 12px 24px;
+    background-color: {{ block.settings.button_bg_color }};
+    color: {{ block.settings.button_text_color }};
+    border: none;
+    border-radius: {{ block.settings.button_radius }}px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    font-family: inherit;
+  }
+
+  .ai-newsletter-copy-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_color }};
+  }
+
+  .ai-newsletter-copy-{{ ai_gen_id }}.copied {
+    background-color: {{ block.settings.success_border_color }};
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-newsletter-input-row-{{ ai_gen_id }} {
+      flex-direction: column;
+    }
+
+    .ai-newsletter-submit-{{ ai_gen_id }} {
+      width: 100%;
+    }
+
+    .ai-newsletter-code-box-{{ ai_gen_id }} {
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .ai-newsletter-code-{{ ai_gen_id }} {
+      font-size: 22px;
+    }
+
+    .ai-newsletter-copy-{{ ai_gen_id }} {
+      width: 100%;
+    }
+  }
+{% endstyle %}
+
+<newsletter-form-{{ ai_gen_id }}
+  class="ai-newsletter-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-newsletter-content-{{ ai_gen_id }}">
+    {% if block.settings.heading != blank %}
+      <h2 class="ai-newsletter-heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
+    {% endif %}
+
+    {% if block.settings.subtext != blank %}
+      <p class="ai-newsletter-subtext-{{ ai_gen_id }}">{{ block.settings.subtext }}</p>
+    {% endif %}
+
+    <div class="ai-newsletter-form-container-{{ ai_gen_id }}" id="form-wrapper-{{ ai_gen_id }}">
+      {%- form 'contact' -%}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        
+        <div class="ai-newsletter-input-row-{{ ai_gen_id }}">
+          <input
+            type="email"
+            name="contact[email]"
+            class="ai-newsletter-email-input-{{ ai_gen_id }}"
+            placeholder="{{ block.settings.email_placeholder }}"
+            aria-required="true"
+            autocorrect="off"
+            autocapitalize="off"
+            autocomplete="email"
+            required
+            id="email-input-{{ ai_gen_id }}"
+          >
+          <button
+            type="submit"
+            class="ai-newsletter-submit-{{ ai_gen_id }}"
+            id="submit-btn-{{ ai_gen_id }}"
+          >
+            {{ block.settings.button_text }}
+          </button>
+        </div>
+
+        <div class="ai-newsletter-error-msg-{{ ai_gen_id }}" id="error-msg-{{ ai_gen_id }}"></div>
+      {%- endform -%}
+    </div>
+
+    <div class="ai-newsletter-success-box-{{ ai_gen_id }}" id="success-box-{{ ai_gen_id }}">
+      <p class="ai-newsletter-success-title-{{ ai_gen_id }}">{{ block.settings.success_message }}</p>
+      
+      <div class="ai-newsletter-code-box-{{ ai_gen_id }}">
+        <p class="ai-newsletter-code-{{ ai_gen_id }}" id="promo-{{ ai_gen_id }}">{{ block.settings.promo_code }}</p>
+        <button
+          type="button"
+          class="ai-newsletter-copy-{{ ai_gen_id }}"
+          id="copy-btn-{{ ai_gen_id }}"
+        >
+          {{ block.settings.copy_button_text }}
+        </button>
+      </div>
+    </div>
+  </div>
+</newsletter-form-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class NewsletterForm{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.form = this.querySelector('form');
+        this.formWrapper = this.querySelector('#form-wrapper-{{ ai_gen_id }}');
+        this.successBox = this.querySelector('#success-box-{{ ai_gen_id }}');
+        this.errorMsg = this.querySelector('#error-msg-{{ ai_gen_id }}');
+        this.copyBtn = this.querySelector('#copy-btn-{{ ai_gen_id }}');
+        this.promoCode = this.querySelector('#promo-{{ ai_gen_id }}');
+
+        if (this.form) {
+          this.form.addEventListener('submit', this.handleSubmit.bind(this));
+        }
+
+        if (this.copyBtn) {
+          this.copyBtn.addEventListener('click', this.handleCopy.bind(this));
+        }
+      }
+
+      handleSubmit(e) {
+        e.preventDefault();
+        
+        const emailInput = this.querySelector('#email-input-{{ ai_gen_id }}');
+        const email = emailInput.value.trim();
+
+        if (!email || !this.validateEmail(email)) {
+          this.showError('Please enter a valid email address');
+          return;
+        }
+
+        const formData = new FormData(this.form);
+
+        fetch(this.form.action, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/javascript'
+          }
+        })
+        .then(response => {
+          this.showSuccess();
+        })
+        .catch(error => {
+          this.showSuccess();
+        });
+      }
+
+      validateEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+      }
+
+      showError(message) {
+        this.errorMsg.textContent = message;
+        this.errorMsg.classList.add('show');
+      }
+
+      showSuccess() {
+        this.formWrapper.style.display = 'none';
+        this.errorMsg.classList.remove('show');
+        this.successBox.classList.add('show');
+      }
+
+      handleCopy() {
+        const code = this.promoCode.textContent;
+        const btn = this.copyBtn;
+        const originalText = btn.textContent;
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(code).then(() => {
+            btn.textContent = '{{ block.settings.copied_text }}';
+            btn.classList.add('copied');
+
+            setTimeout(() => {
+              btn.textContent = originalText;
+              btn.classList.remove('copied');
+            }, 2000);
+          }).catch(() => {
+            this.fallbackCopy(code, btn, originalText);
+          });
+        } else {
+          this.fallbackCopy(code, btn, originalText);
+        }
+      }
+
+      fallbackCopy(text, btn, originalText) {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        
+        try {
+          document.execCommand('copy');
+          btn.textContent = '{{ block.settings.copied_text }}';
+          btn.classList.add('copied');
+
+          setTimeout(() => {
+            btn.textContent = originalText;
+            btn.classList.remove('copied');
+          }, 2000);
+        } catch (err) {
+          console.error('Copy failed');
+        }
+        
+        document.body.removeChild(textarea);
+      }
+    }
+
+    customElements.define('newsletter-form-{{ ai_gen_id }}', NewsletterForm{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Newsletter signup",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Join Our Newsletter"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Subscribe to get special offers and updates"
+    },
+    {
+      "type": "text",
+      "id": "email_placeholder",
+      "label": "Email placeholder",
+      "default": "Enter your email"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Get Code"
+    },
+    {
+      "type": "header",
+      "content": "Success message"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "Use code"
+    },
+    {
+      "type": "text",
+      "id": "promo_code",
+      "label": "Promo code",
+      "default": "HEALME20"
+    },
+    {
+      "type": "text",
+      "id": "copy_button_text",
+      "label": "Copy button text",
+      "default": "Copy Code"
+    },
+    {
+      "type": "text",
+      "id": "copied_text",
+      "label": "Copied confirmation",
+      "default": "Copied!"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#2b2c2d"
+    },
+    {
+      "type": "color",
+      "id": "input_bg_color",
+      "label": "Input background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "input_text_color",
+      "label": "Input text",
+      "default": "#2b2c2d"
+    },
+    {
+      "type": "color",
+      "id": "input_border_color",
+      "label": "Input border",
+      "default": "#c2b7ac"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Button background",
+      "default": "#4dc61a"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text",
+      "default": "#262626"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_color",
+      "label": "Button hover",
+      "default": "#3da615"
+    },
+    {
+      "type": "color",
+      "id": "success_bg_color",
+      "label": "Success background",
+      "default": "#f8f8f8"
+    },
+    {
+      "type": "color",
+      "id": "success_border_color",
+      "label": "Success border",
+      "default": "#4dc61a"
+    },
+    {
+      "type": "color",
+      "id": "code_bg_color",
+      "label": "Code background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "code_border_color",
+      "label": "Code border",
+      "default": "#4dc61a"
+    },
+    {
+      "type": "color",
+      "id": "code_text_color",
+      "label": "Code text",
+      "default": "#4dc61a"
+    },
+    {
+      "type": "color",
+      "id": "error_color",
+      "label": "Error",
+      "default": "#D82C0D"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading size",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "subtext_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Subtext size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "input_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Input border radius",
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "button_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Button border radius",
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    }
+  ],
+  "presets": [
+    {
+      "name": "Newsletter signup"
+    }
+  ]
+}
+{% endschema %}

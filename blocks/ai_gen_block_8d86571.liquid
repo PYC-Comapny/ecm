@@ -1,0 +1,797 @@
+{% doc %}
+  @prompt
+    Create a newsletter email signup form with these exact features: email input field, submit button, and after successful submission show the message "Use code HEALME20" with a clickable "Copy Code" button next to HEALME20 that copies the code to clipboard and shows a confirmation when clicked. Match the styling and layout of a modern newsletter signup form.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-newsletter-signup-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    padding: {{ block.settings.padding }}px;
+    background-color: {{ block.settings.background_color }};
+    border-radius: {{ block.settings.border_radius }}px;
+  }
+
+  .ai-newsletter-container-{{ ai_gen_id }} {
+    max-width: {{ block.settings.max_width }}px;
+    margin: 0 auto;
+  }
+
+  .ai-newsletter-heading-{{ ai_gen_id }} {
+    margin: 0 0 {{ block.settings.heading_spacing }}px;
+    color: {{ block.settings.text_color }};
+    font-size: {{ block.settings.heading_size }}px;
+    text-align: {{ block.settings.text_alignment }};
+  }
+
+  .ai-newsletter-subtext-{{ ai_gen_id }} {
+    margin: 0 0 {{ block.settings.subtext_spacing }}px;
+    color: {{ block.settings.text_color }};
+    font-size: {{ block.settings.subtext_size }}px;
+    text-align: {{ block.settings.text_alignment }};
+    opacity: 0.9;
+  }
+
+  .ai-newsletter-form-wrapper-{{ ai_gen_id }} {
+    width: 100%;
+  }
+
+  .ai-newsletter-form-{{ ai_gen_id }} {
+    display: flex;
+    gap: {{ block.settings.form_gap }}px;
+    align-items: flex-start;
+  }
+
+  .ai-newsletter-input-wrapper-{{ ai_gen_id }} {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .ai-newsletter-input-{{ ai_gen_id }} {
+    width: 100%;
+    padding: {{ block.settings.input_padding }}px;
+    border: {{ block.settings.input_border_width }}px solid {{ block.settings.input_border_color }};
+    border-radius: {{ block.settings.input_border_radius }}px;
+    font-size: {{ block.settings.input_font_size }}px;
+    background-color: {{ block.settings.input_background }};
+    color: {{ block.settings.input_text_color }};
+    transition: border-color 0.3s ease;
+  }
+
+  .ai-newsletter-input-{{ ai_gen_id }}:focus {
+    outline: none;
+    border-color: {{ block.settings.input_focus_border_color }};
+  }
+
+  .ai-newsletter-input-{{ ai_gen_id }}::placeholder {
+    color: {{ block.settings.input_placeholder_color }};
+    opacity: 0.7;
+  }
+
+  .ai-newsletter-submit-{{ ai_gen_id }} {
+    padding: {{ block.settings.button_padding }}px {{ block.settings.button_padding | times: 1.5 }}px;
+    background-color: {{ block.settings.button_background }};
+    color: {{ block.settings.button_text_color }};
+    border: none;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-size: {{ block.settings.button_font_size }}px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .ai-newsletter-submit-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_background }};
+    transform: translateY(-1px);
+  }
+
+  .ai-newsletter-submit-{{ ai_gen_id }}:active {
+    transform: translateY(0);
+  }
+
+  .ai-newsletter-message-{{ ai_gen_id }} {
+    margin-top: 12px;
+    font-size: 14px;
+    text-align: {{ block.settings.text_alignment }};
+  }
+
+  .ai-newsletter-error-{{ ai_gen_id }} {
+    color: {{ block.settings.error_color }};
+  }
+
+  .ai-newsletter-success-{{ ai_gen_id }} {
+    display: none;
+    padding: {{ block.settings.success_padding }}px;
+    background-color: {{ block.settings.success_background }};
+    border-radius: {{ block.settings.border_radius }}px;
+    text-align: center;
+  }
+
+  .ai-newsletter-success-{{ ai_gen_id }}.active {
+    display: block;
+  }
+
+  .ai-newsletter-success-message-{{ ai_gen_id }} {
+    margin: 0 0 16px;
+    color: {{ block.settings.success_text_color }};
+    font-size: {{ block.settings.success_message_size }}px;
+    font-weight: 600;
+  }
+
+  .ai-newsletter-code-container-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .ai-newsletter-code-text-{{ ai_gen_id }} {
+    color: {{ block.settings.success_text_color }};
+    font-size: {{ block.settings.code_text_size }}px;
+  }
+
+  .ai-newsletter-code-{{ ai_gen_id }} {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: {{ block.settings.code_background }};
+    color: {{ block.settings.code_text_color }};
+    font-size: {{ block.settings.code_size }}px;
+    font-weight: 700;
+    border-radius: {{ block.settings.code_border_radius }}px;
+    letter-spacing: 1px;
+  }
+
+  .ai-newsletter-copy-btn-{{ ai_gen_id }} {
+    padding: 8px 16px;
+    background-color: {{ block.settings.copy_button_background }};
+    color: {{ block.settings.copy_button_text_color }};
+    border: none;
+    border-radius: {{ block.settings.copy_button_border_radius }}px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  .ai-newsletter-copy-btn-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.copy_button_hover_background }};
+    transform: translateY(-1px);
+  }
+
+  .ai-newsletter-copy-btn-{{ ai_gen_id }}:active {
+    transform: translateY(0);
+  }
+
+  .ai-newsletter-copy-confirmation-{{ ai_gen_id }} {
+    display: none;
+    margin-top: 8px;
+    color: {{ block.settings.success_text_color }};
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .ai-newsletter-copy-confirmation-{{ ai_gen_id }}.active {
+    display: block;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-newsletter-signup-{{ ai_gen_id }} {
+      padding: {{ block.settings.padding | times: 0.7 }}px;
+    }
+
+    .ai-newsletter-form-{{ ai_gen_id }} {
+      flex-direction: column;
+    }
+
+    .ai-newsletter-submit-{{ ai_gen_id }} {
+      width: 100%;
+    }
+
+    .ai-newsletter-heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size | times: 0.85 }}px;
+    }
+
+    .ai-newsletter-code-container-{{ ai_gen_id }} {
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .ai-newsletter-copy-btn-{{ ai_gen_id }} {
+      width: 100%;
+    }
+  }
+{% endstyle %}
+
+<newsletter-signup-{{ ai_gen_id }}
+  class="ai-newsletter-signup-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-newsletter-container-{{ ai_gen_id }}">
+    <div class="ai-newsletter-form-wrapper-{{ ai_gen_id }}">
+      {% if block.settings.heading != blank %}
+        <h2 class="ai-newsletter-heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
+      {% endif %}
+
+      {% if block.settings.subtext != blank %}
+        <div class="ai-newsletter-subtext-{{ ai_gen_id }}">{{ block.settings.subtext }}</div>
+      {% endif %}
+
+      {%- form 'customer', class: 'ai-newsletter-form-content' -%}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        
+        <div class="ai-newsletter-form-{{ ai_gen_id }}">
+          <div class="ai-newsletter-input-wrapper-{{ ai_gen_id }}">
+            <input
+              type="email"
+              name="contact[email]"
+              class="ai-newsletter-input-{{ ai_gen_id }}"
+              value="{{ form.email }}"
+              aria-required="true"
+              autocorrect="off"
+              autocapitalize="off"
+              autocomplete="email"
+              {% if form.errors %}
+                aria-invalid="true"
+                aria-describedby="ai-newsletter-error-{{ ai_gen_id }}"
+              {% endif %}
+              placeholder="{{ block.settings.email_placeholder }}"
+              required
+            >
+          </div>
+          <button
+            type="submit"
+            class="ai-newsletter-submit-{{ ai_gen_id }}"
+          >
+            {{ block.settings.button_text }}
+          </button>
+        </div>
+
+        {%- if form.errors -%}
+          <div
+            id="ai-newsletter-error-{{ ai_gen_id }}"
+            class="ai-newsletter-message-{{ ai_gen_id }} ai-newsletter-error-{{ ai_gen_id }}"
+          >
+            {{ form.errors.messages.email }}
+          </div>
+        {%- endif -%}
+      {%- endform -%}
+    </div>
+
+    <div class="ai-newsletter-success-{{ ai_gen_id }} {% if form.posted_successfully? %}active{% endif %}">
+      <p class="ai-newsletter-success-message-{{ ai_gen_id }}">
+        {{ block.settings.success_message }}
+      </p>
+      <div class="ai-newsletter-code-container-{{ ai_gen_id }}">
+        <span class="ai-newsletter-code-text-{{ ai_gen_id }}">Use code</span>
+        <span class="ai-newsletter-code-{{ ai_gen_id }}" data-code="{{ block.settings.promo_code }}">
+          {{ block.settings.promo_code }}
+        </span>
+        <button
+          type="button"
+          class="ai-newsletter-copy-btn-{{ ai_gen_id }}"
+          data-copy-button
+        >
+          Copy Code
+        </button>
+      </div>
+      <div class="ai-newsletter-copy-confirmation-{{ ai_gen_id }}" data-copy-confirmation>
+        ✓ Code copied to clipboard!
+      </div>
+    </div>
+  </div>
+</newsletter-signup-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class NewsletterSignup{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.copyButton = this.querySelector('[data-copy-button]');
+        this.copyConfirmation = this.querySelector('[data-copy-confirmation]');
+        this.codeElement = this.querySelector('.ai-newsletter-code-{{ ai_gen_id }}');
+        
+        if (this.copyButton) {
+          this.copyButton.addEventListener('click', this.handleCopyCode.bind(this));
+        }
+      }
+
+      handleCopyCode() {
+        const code = this.codeElement.getAttribute('data-code');
+        
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(code).then(() => {
+            this.showConfirmation();
+          }).catch(() => {
+            this.fallbackCopyCode(code);
+          });
+        } else {
+          this.fallbackCopyCode(code);
+        }
+      }
+
+      fallbackCopyCode(code) {
+        const textArea = document.createElement('textarea');
+        textArea.value = code;
+        textArea.style.position = 'fixed';
+        textArea.style.left = '-999999px';
+        textArea.style.top = '-999999px';
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        
+        try {
+          document.execCommand('copy');
+          this.showConfirmation();
+        } catch (err) {
+          console.error('Failed to copy code:', err);
+        }
+        
+        document.body.removeChild(textArea);
+      }
+
+      showConfirmation() {
+        this.copyConfirmation.classList.add('active');
+        this.copyButton.textContent = 'Copied!';
+        
+        setTimeout(() => {
+          this.copyConfirmation.classList.remove('active');
+          this.copyButton.textContent = 'Copy Code';
+        }, 3000);
+      }
+    }
+
+    customElements.define('newsletter-signup-{{ ai_gen_id }}', NewsletterSignup{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Newsletter signup",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Join Our Newsletter"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Subscribe to get special offers and updates"
+    },
+    {
+      "type": "text",
+      "id": "email_placeholder",
+      "label": "Email placeholder",
+      "default": "Enter your email"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Subscribe"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "Thanks for subscribing!"
+    },
+    {
+      "type": "text",
+      "id": "promo_code",
+      "label": "Promo code",
+      "default": "HEALME20"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Maximum width",
+      "min": 400,
+      "max": 1000,
+      "step": 50,
+      "unit": "px",
+      "default": 600
+    },
+    {
+      "type": "range",
+      "id": "padding",
+      "label": "Padding",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#f8f8f8"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#2b2c2d"
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Size",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "heading_spacing",
+      "label": "Bottom spacing",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Subtext"
+    },
+    {
+      "type": "range",
+      "id": "subtext_size",
+      "label": "Size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "subtext_spacing",
+      "label": "Bottom spacing",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Form"
+    },
+    {
+      "type": "range",
+      "id": "form_gap",
+      "label": "Gap between input and button",
+      "min": 4,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Input field"
+    },
+    {
+      "type": "color",
+      "id": "input_background",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "input_text_color",
+      "label": "Text",
+      "default": "#2b2c2d"
+    },
+    {
+      "type": "color",
+      "id": "input_placeholder_color",
+      "label": "Placeholder",
+      "default": "#999999"
+    },
+    {
+      "type": "color",
+      "id": "input_border_color",
+      "label": "Border",
+      "default": "#dddddd"
+    },
+    {
+      "type": "color",
+      "id": "input_focus_border_color",
+      "label": "Focus border",
+      "default": "#4dc61a"
+    },
+    {
+      "type": "range",
+      "id": "input_border_width",
+      "label": "Border width",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "input_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "input_padding",
+      "label": "Padding",
+      "min": 8,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "input_font_size",
+      "label": "Font size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Submit button"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Background",
+      "default": "#4dc61a"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_background",
+      "label": "Hover background",
+      "default": "#3da515"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "button_padding",
+      "label": "Padding",
+      "min": 8,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "label": "Font size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Success state"
+    },
+    {
+      "type": "color",
+      "id": "success_background",
+      "label": "Background",
+      "default": "#e8f5e9"
+    },
+    {
+      "type": "color",
+      "id": "success_text_color",
+      "label": "Text",
+      "default": "#2b2c2d"
+    },
+    {
+      "type": "range",
+      "id": "success_padding",
+      "label": "Padding",
+      "min": 16,
+      "max": 48,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "success_message_size",
+      "label": "Message size",
+      "min": 14,
+      "max": 28,
+      "step": 2,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "header",
+      "content": "Promo code display"
+    },
+    {
+      "type": "color",
+      "id": "code_background",
+      "label": "Code background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "code_text_color",
+      "label": "Code text",
+      "default": "#4dc61a"
+    },
+    {
+      "type": "range",
+      "id": "code_size",
+      "label": "Code size",
+      "min": 14,
+      "max": 28,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "code_text_size",
+      "label": "Label size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "code_border_radius",
+      "label": "Code border radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 6
+    },
+    {
+      "type": "header",
+      "content": "Copy button"
+    },
+    {
+      "type": "color",
+      "id": "copy_button_background",
+      "label": "Background",
+      "default": "#4dc61a"
+    },
+    {
+      "type": "color",
+      "id": "copy_button_hover_background",
+      "label": "Hover background",
+      "default": "#3da515"
+    },
+    {
+      "type": "color",
+      "id": "copy_button_text_color",
+      "label": "Text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "copy_button_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 6
+    },
+    {
+      "type": "header",
+      "content": "Error message"
+    },
+    {
+      "type": "color",
+      "id": "error_color",
+      "label": "Error color",
+      "default": "#d32f2f"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Newsletter signup"
+    }
+  ]
+}
+{% endschema %}
