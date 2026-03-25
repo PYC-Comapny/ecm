@@ -87,6 +87,14 @@
             "text_style": "body"
           }
         },
+        "caption_nnFrjK": {
+          "type": "caption",
+          "settings": {
+            "caption": "More Lives Changed Below",
+            "text_style": "caption-with-letter-spacing",
+            "text_size": "small"
+          }
+        },
         "button_64t6nJ": {
           "type": "button",
           "settings": {
@@ -99,6 +107,7 @@
       "block_order": [
         "heading_j7r3fd",
         "text_CNJj6W",
+        "caption_nnFrjK",
         "button_64t6nJ"
       ],
       "name": "t:sections.image-with-text.presets.name",
