@@ -1,0 +1,180 @@
+<div class="anti-gravity-dashboard snippet-diagnostic">
+  <div class="diagnostic-panel">
+    <!-- Header -->
+    <div class="panel-header">
+      <div class="header-left">
+        <h2 class="panel-title">KNEE JOINT SCAN</h2>
+        <span class="panel-subtitle">LIVE METRIC SCAN</span>
+        <div class="window-controls">
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="main-score">
+          <div class="score-value">94.2%</div>
+          <div class="score-indicator">
+            <span class="up-arrow">↑</span>
+            <span class="green-dot"></span>
+            <span class="score-text">↑ 2.1% PREV_REP</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Graphic -->
+    <div class="main-graphic-container">
+      <img src="{{ 'knee-joint-anatomy.png' | asset_url }}" alt="Anatomical Knee Joint Scan" class="knee-joint-img">
+      
+      <!-- Crucial Overlay: Concentric Red Light Rings -->
+      <div class="anti-grav-overlay">
+        <div class="anti-grav-ring anti-grav-ring-1"></div>
+        <div class="anti-grav-ring anti-grav-ring-2"></div>
+        <div class="anti-grav-ring anti-grav-ring-3"></div>
+        <div class="anti-grav-ring anti-grav-ring-4"></div>
+        <div class="anti-grav-core"></div>
+      </div>
+    </div>
+
+    <!-- Metric Boxes -->
+    <div class="metric-boxes">
+      <div class="metric-box bg-red">
+        <h3 class="box-header">CELLULAR REGENERATION</h3>
+        <div class="box-score">200% Increase</div>
+        <p class="box-text">Red Light Therapy Promotes Faster Recovery and Stronger Knees.</p>
+        <div class="box-indicator green-dot"></div>
+      </div>
+      
+      <div class="metric-box bg-green">
+        <h3 class="box-header">DEEP TISSUE HEALING</h3>
+        <div class="box-score">3-7 cm ↑ Penetration</div>
+        <p class="box-text">Infrared Light Targets Deep-Seated Pain and Inflammation.</p>
+      </div>
+
+      <div class="metric-box bg-yellow">
+        <h3 class="box-header">STIFFNESS REDUCTION</h3>
+        <div class="box-score">30-50% Reduction</div>
+        <p class="box-text">Heat Therapy Makes Movement Easier and Less Painful.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .snippet-diagnostic.anti-gravity-dashboard {
+    padding: 20px 0;
+    width: 100%;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  .snippet-diagnostic .diagnostic-panel {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    width: 100%;
+    padding: 16px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.05);
+  }
+
+  .snippet-diagnostic .panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+  }
+
+  .snippet-diagnostic .panel-title {
+    font-size: 14px;
+    font-weight: 800;
+    color: #1F1F1F;
+    margin: 0 0 2px 0;
+    letter-spacing: -0.2px;
+  }
+
+  .snippet-diagnostic .panel-subtitle {
+    font-size: 8px;
+    color: #6b7280;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .snippet-diagnostic .score-value {
+    font-size: 20px;
+    font-weight: 800;
+    color: #1F1F1F;
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+
+  .snippet-diagnostic .main-graphic-container {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    margin-bottom: 15px;
+    background: #f9fafb;
+    border-radius: 8px;
+  }
+
+  .snippet-diagnostic .knee-joint-img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 90%;
+    width: auto;
+    object-fit: contain;
+    z-index: 1;
+  }
+
+  .snippet-diagnostic .anti-grav-overlay {
+    position: absolute;
+    top: 55%; /* Centered more on joint */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 150px;
+    height: 150px;
+    z-index: 10;
+    pointer-events: none;
+  }
+
+  .snippet-diagnostic .metric-boxes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .snippet-diagnostic .metric-box {
+    padding: 8px;
+    border-radius: 8px;
+  }
+
+  .snippet-diagnostic .box-header {
+    font-size: 7px;
+    font-weight: 700;
+    color: #4b5563;
+    margin: 0 0 4px 0;
+  }
+
+  .snippet-diagnostic .box-score {
+    font-size: 12px;
+    font-weight: 800;
+    color: #1F1F1F;
+    margin-bottom: 2px;
+  }
+
+  .snippet-diagnostic .box-text {
+    font-size: 9px;
+    color: #4b5563;
+    line-height: 1.2;
+    margin: 0;
+  }
+</style>

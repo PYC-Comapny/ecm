@@ -1,0 +1,94 @@
+/* Phase 1: Design System & Visual Theme Setup */
+
+:root {
+  /* Colors & Palette */
+  --color-white: #FFFFFF;
+  --color-brand-black: #1F1F1F;
+  --color-accent-primary: #F4D03F; /* Energetic Yellow */
+  --color-accent-glow: rgba(244, 208, 63, 0.4);
+  --color-trust-green: #3CB371; /* Medium Sea Green */
+  --color-warning-amber: #F59E0B;
+  --color-critical-red: #EF4444;
+  --color-critical-red-dark: #CF3F5C;
+}
+
+/* Typography */
+.heading-premium {
+  font-family: 'Outfit', 'Inter', sans-serif;
+  font-weight: 900; /* Black weight */
+  letter-spacing: -0.05em; /* tracking-tighter */
+  text-transform: uppercase;
+  font-style: italic;
+}
+
+/* Textures & Effects */
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-sm */
+}
+
+.glass-dark {
+  background: rgba(31, 31, 31, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.bg-dot-grid {
+  background-image: radial-gradient(var(--color-brand-black) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.bg-dot-grid-light {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.2) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.bg-glow-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(120px);
+  background-color: var(--color-accent-glow);
+  z-index: -1;
+}
+
+/* Animations & Motion */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 700ms cubic-bezier(0.21, 0.45, 0.32, 0.9), transform 700ms cubic-bezier(0.21, 0.45, 0.32, 0.9);
+}
+
+.animate-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.stagger-1 { transition-delay: 100ms; }
+.stagger-2 { transition-delay: 200ms; }
+.stagger-3 { transition-delay: 300ms; }
+.stagger-4 { transition-delay: 400ms; }
+.stagger-5 { transition-delay: 500ms; }
+
+@keyframes premium-glow-pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(244, 208, 63, 0.7);
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 0 20px 10px rgba(244, 208, 63, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(244, 208, 63, 0);
+  }
+}
+
+.cta-pulsing {
+  animation: premium-glow-pulse 3s infinite;
+}
