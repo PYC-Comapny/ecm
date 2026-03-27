@@ -37,7 +37,7 @@ This document outlines the detailed plan to update the Knee Massager page into a
 ### Phase 3: Advanced CRO & Performance Injection
 - [ ] **1. Frictionless Checkout Bypassing:** Recode primary CTA buttons (Green `#3CB371`) to skip the cart drawer and jump straight to checkout.
 - [ ] **2. Sticky Mobile CTA:** Implement a `.sticky-cta-bar` at the bottom of the screen that triggers after the Hero section.
-- [ ] **3. Performance Load:** Strip heavy inactive native Shopify javascript assets from the funnel layout for instant load speeds.
+- [x] **3. Performance Load:** Strip heavy inactive native Shopify javascript assets from the funnel layout for instant load speeds.
 
 ---
 
