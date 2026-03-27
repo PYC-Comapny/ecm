@@ -1,5 +1,5 @@
 {
-  "layout": "funnel",
+  "layout": "theme.funnel",
   "sections": {
     "rich_text_JVCAjx": {
       "type": "rich-text",
