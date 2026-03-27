@@ -193,7 +193,10 @@
     },
     "anti_gravity_vs_table": {
       "type": "anti-gravity-vs-table",
-      "settings": {}
+      "settings": {
+        "button_label": "YES! I WANT PAIN-FREE KNEES",
+        "button_link": "#checkout-section"
+      }
     },
     "vitals_c3ee5db1_tUQb6F": {
       "type": "vitals-c3ee5db1",
@@ -238,7 +241,6 @@
         "vertical_margin_mobile": 0
       }
     },
-
     "ag_faq_new": {
       "type": "ag-faq",
       "blocks": {
