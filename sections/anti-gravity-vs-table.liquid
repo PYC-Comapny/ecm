@@ -134,7 +134,7 @@
         <strong>DON'T WAIT!</strong> Prevent serious injuries and surgeries before they begin.
       </p>
       <div class="vs-cta-wrapper">
-        <a href="{{ section.settings.button_link | default: '#MainProduct-' | append: section.id }}" class="vs-cta-button button button--primary cta-pulsing">
+        <a href="{{ section.settings.button_link | default: '#checkout-section' }}" class="vs-cta-button button button--primary cta-pulsing">
           {{ section.settings.button_label | default: 'YES! I WANT PAIN-FREE KNEES' }}
         </a>
       </div>
@@ -413,7 +413,8 @@
       "type": "url",
       "id": "button_link",
       "label": "Button Link",
-      "info": "Leave blank to scroll to product selector"
+      "default": "/#checkout-section",
+      "info": "Leave blank to scroll to checkout section"
     }
   ],
   "presets": [

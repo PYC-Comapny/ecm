@@ -9,7 +9,7 @@
       {% endif %}
       
       <div class="ag-cta-actions">
-        <a href="{{ section.settings.button_link }}" class="ag-cta-button pulse-animation">
+        <a href="{{ section.settings.button_link | default: '#checkout-section' }}" class="ag-cta-button button button--primary pulse-animation">
           {{ section.settings.button_label }}
         </a>
       </div>
@@ -131,7 +131,8 @@
     {
       "type": "url",
       "id": "button_link",
-      "label": "Button Link"
+      "label": "Button Link",
+      "default": "/#checkout-section"
     },
     {
       "type": "text",
