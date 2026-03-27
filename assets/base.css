@@ -3595,3 +3595,90 @@ details-disclosure > details {
     transform: translateX(100%) scaleX(0);
   }
 }
+
+/* --- COOKIE CONSENT MINIMIZATION --- */
+/* Drastically reduce the height and intrusive nature of common cookie consent banners */
+#shopify-privacy-banner-container,
+.vls-cookies-bar, .v-cookies-bar, .v-cookie-bar,
+.cc-window, .cc-banner, .cc-type-info, .cc-theme-edgeless,
+#cookie-banner, .cookie-banner, .cookie-notice,
+#gdpr-banner, .gdpr-banner {
+  padding: 6px 15px !important;
+  font-size: 10px !important;
+  line-height: 1.2 !important;
+  max-height: none !important;
+  min-height: auto !important;
+  height: auto !important;
+  width: 100% !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  transform: none !important;
+  background: rgba(255, 255, 255, 0.98) !important;
+  backdrop-filter: blur(8px) !important;
+  border-top: 1px solid rgba(0, 0, 0, 0.05) !important;
+  box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.05) !important;
+  z-index: 2147483647 !important; /* Max z-index to stay above everything but stay thin */
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 15px !important;
+  flex-direction: row !important;
+}
+
+#shopify-privacy-banner-container p,
+.vls-cookies-bar p, .v-cookies-bar p,
+.cc-message, .cookie-banner p {
+  margin: 0 !important;
+  padding: 0 !important;
+  flex: 1 1 auto !important;
+  color: #444 !important;
+  font-size: 10px !important;
+  text-align: left !important;
+  max-width: 70% !important;
+}
+
+#shopify-privacy-banner-container button,
+.vls-cookies-bar button, .v-cookies-bar button,
+.cc-btn, .cookie-banner button {
+  padding: 4px 10px !important;
+  font-size: 9px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  border-radius: 2px !important;
+  min-height: unset !important;
+  height: 28px !important;
+  margin: 0 !important;
+  border: none !important;
+  font-weight: 600 !important;
+}
+
+#shopify-privacy-banner-container .banner-actions,
+.vls-cookies-bar .actions {
+  display: flex !important;
+  gap: 8px !important;
+}
+
+/* Hide extra decorative elements or links that bloat the height */
+#shopify-privacy-banner-container .banner-logo,
+.vls-cookies-bar .v-icon, 
+.cc-link, 
+.cookie-banner .extra-info {
+  display: none !important;
+}
+
+@media screen and (max-width: 749px) {
+  #shopify-privacy-banner-container,
+  .vls-cookies-bar, .v-cookies-bar,
+  .cc-window {
+    padding: 8px 12px !important;
+    gap: 10px !important;
+  }
+  
+  #shopify-privacy-banner-container p,
+  .vls-cookies-bar p, .v-cookies-bar p,
+  .cc-message {
+    max-width: 100% !important;
+    font-size: 9px !important;
+  }
+}

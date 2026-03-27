@@ -29,11 +29,7 @@
     {% render 'meta-tags' %}
 
     <script src="{{ 'constants.js' | asset_url }}" defer="defer"></script>
-    <script src="{{ 'pubsub.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
-    <script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>
-    <script src="{{ 'details-modal.js' | asset_url }}" defer="defer"></script>
-    <script src="{{ 'search-form.js' | asset_url }}" defer="defer"></script>
 
     {%- if settings.animations_reveal_on_scroll -%}
       <script src="{{ 'animations.js' | asset_url }}" defer="defer"></script>
@@ -257,15 +253,17 @@
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
     {{ 'premium-funnel.css' | asset_url | stylesheet_tag }}
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
-
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap" media="print" onload="this.media='all'">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
     {%- if settings.cart_type == 'drawer' -%}
-      {{ 'component-cart-drawer.css' | asset_url | stylesheet_tag }}
-      {{ 'component-cart.css' | asset_url | stylesheet_tag }}
-      {{ 'component-totals.css' | asset_url | stylesheet_tag }}
-      {{ 'component-price.css' | asset_url | stylesheet_tag }}
-      {{ 'component-discounts.css' | asset_url | stylesheet_tag }}
+      <link rel="stylesheet" href="{{ 'component-cart-drawer.css' | asset_url }}" media="print" onload="this.media='all'">
+      <link rel="stylesheet" href="{{ 'component-cart.css' | asset_url }}" media="print" onload="this.media='all'">
+      <link rel="stylesheet" href="{{ 'component-totals.css' | asset_url }}" media="print" onload="this.media='all'">
+      <link rel="stylesheet" href="{{ 'component-price.css' | asset_url }}" media="print" onload="this.media='all'">
+      <link rel="stylesheet" href="{{ 'component-discounts.css' | asset_url }}" media="print" onload="this.media='all'">
     {%- endif -%}
 
     {%- unless settings.type_body_font.system? -%}
@@ -298,7 +296,7 @@
         document.documentElement.classList.add('shopify-design-mode');
       }
     </script>
-  {% include 'pagefly-app-header' %}</head>
+</head>
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
@@ -381,6 +379,44 @@
         });
         document.querySelectorAll('.animate-on-scroll').forEach((el) => {
           observer.observe(el);
+        });
+
+        // Global CTA Checkout Redirect
+        document.addEventListener('submit', function(e) {
+          const form = e.target;
+          if (form.action && (form.action.includes('/cart/add') || form.getAttribute('data-type') === 'add-to-cart-form')) {
+            let returnTo = form.querySelector('input[name="return_to"]');
+            if (!returnTo) {
+              returnTo = document.createElement('input');
+              returnTo.type = 'hidden';
+              returnTo.name = 'return_to';
+              returnTo.value = '/checkout';
+              form.appendChild(returnTo);
+            } else {
+              returnTo.value = '/checkout';
+            }
+          }
+        });
+
+        // Global CTA Direct-to-Checkout
+        document.addEventListener('click', function(e) {
+          const link = e.target.closest('a');
+          if (link && link.getAttribute('href') === '#checkout-section') {
+            e.preventDefault();
+            const variantIdInput = document.querySelector('input[name="id"].product-variant-id');
+            const variantId = variantIdInput ? variantIdInput.value : null;
+
+            if (variantId) {
+              // Redirect to direct checkout with 1 unit
+              window.location.href = `/cart/${variantId}:1`;
+            } else {
+              // Fallback: smooth scroll if no variant found
+              const targetElement = document.getElementById('checkout-section');
+              if (targetElement) {
+                targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              }
+            }
+          }
         });
       });
     </script>

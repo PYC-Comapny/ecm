@@ -37,6 +37,10 @@
     if value.available
       assign option_disabled = false
     endif
+    
+    if product.title contains 'Knee Massager' or product.handle contains 'knee-massager'
+      assign option_disabled = false
+    endif
   -%}
 
   {%- capture input_id -%}
