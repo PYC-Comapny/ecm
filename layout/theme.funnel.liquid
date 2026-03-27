@@ -380,6 +380,44 @@
         document.querySelectorAll('.animate-on-scroll').forEach((el) => {
           observer.observe(el);
         });
+
+        // Global CTA Checkout Redirect
+        document.addEventListener('submit', function(e) {
+          const form = e.target;
+          if (form.action && (form.action.includes('/cart/add') || form.getAttribute('data-type') === 'add-to-cart-form')) {
+            let returnTo = form.querySelector('input[name="return_to"]');
+            if (!returnTo) {
+              returnTo = document.createElement('input');
+              returnTo.type = 'hidden';
+              returnTo.name = 'return_to';
+              returnTo.value = '/checkout';
+              form.appendChild(returnTo);
+            } else {
+              returnTo.value = '/checkout';
+            }
+          }
+        });
+
+        // Global CTA Direct-to-Checkout
+        document.addEventListener('click', function(e) {
+          const link = e.target.closest('a');
+          if (link && link.getAttribute('href') === '#checkout-section') {
+            e.preventDefault();
+            const variantIdInput = document.querySelector('input[name="id"].product-variant-id');
+            const variantId = variantIdInput ? variantIdInput.value : null;
+
+            if (variantId) {
+              // Redirect to direct checkout with 1 unit
+              window.location.href = `/cart/${variantId}:1`;
+            } else {
+              // Fallback: smooth scroll if no variant found
+              const targetElement = document.getElementById('checkout-section');
+              if (targetElement) {
+                targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              }
+            }
+          }
+        });
       });
     </script>
   </body>

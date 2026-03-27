@@ -43,7 +43,7 @@
           "type": "button",
           "settings": {
             "button_label": "FREE MY KNEES",
-            "button_link": "#MainProduct-main",
+            "button_link": "#checkout-section",
             "button_style_secondary": false,
             "button_label_2": "",
             "button_link_2": "",
@@ -218,7 +218,7 @@
         "heading": "Ready For Some Pain Relief?",
         "subheading": "",
         "button_label": "FREE MY KNEES",
-        "button_link": "#MainProduct-main",
+        "button_link": "#checkout-section",
         "trust_text": "✓ 30-Day Money Back Guarantee"
       }
     },

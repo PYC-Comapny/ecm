@@ -10,7 +10,7 @@
   Usage:
   {% render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: true %}
 {% endcomment %}
-<div {{ block.shopify_attributes }}>
+<div {{ block.shopify_attributes }} id="checkout-section">
   {%- if product != blank -%}
     {%- liquid
       assign gift_card_recipient_feature_active = false
@@ -43,6 +43,7 @@
         novalidate: 'novalidate',
         data-type: 'add-to-cart-form'
       -%}
+        <input type="hidden" name="return_to" value="/checkout">
         <input
           type="hidden"
           name="id"
@@ -51,7 +52,9 @@
             or quantity_rule_soldout
             or product.selected_or_first_available_variant == null
           %}
-            disabled
+            {% unless product.title contains 'Knee Massager' or product.handle contains 'knee-massager' %}
+              disabled
+            {% endunless %}
           {% endif %}
           class="product-variant-id"
         >
@@ -69,26 +72,33 @@
             if product.selected_or_first_available_variant.quantity_rule.min > product.selected_or_first_available_variant.inventory_quantity and check_against_inventory
               assign quantity_rule_soldout = true
             endif
+            
+            assign is_sold_out = false
+            if product.selected_or_first_available_variant.available == false or quantity_rule_soldout or product.selected_or_first_available_variant == null
+              assign is_sold_out = true
+            endif
+            
+            if product.title contains 'Knee Massager' or product.handle contains 'knee-massager'
+              assign is_sold_out = false
+            endif
           -%}
           <button
             id="ProductSubmitButton-{{ section_id }}"
             type="submit"
             name="add"
-            class="product-form__submit button button--full-width {% if show_dynamic_checkout %}button--secondary{% else %}button--primary{% endif %}"
-            {% if product.selected_or_first_available_variant.available == false
-              or quantity_rule_soldout
-              or product.selected_or_first_available_variant == null
-            %}
+            class="product-form__submit button button--full-width {% if show_dynamic_checkout %}button--secondary{% else %}button--primary{% endif %} pulse-animation"
+            {% if is_sold_out %}
               disabled
             {% endif %}
+            style="background-color: #3cb371 !important; color: white !important; font-weight: 900 !important; font-size: 1.8rem !important; padding: 15px !important; border-radius: 50px !important;"
           >
             <span>
-              {%- if product.selected_or_first_available_variant == null -%}
+              {%- if product.selected_or_first_available_variant == null and is_sold_out -%}
                 {{ 'products.product.unavailable' | t }}
-              {%- elsif product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
+              {%- elsif is_sold_out -%}
                 {{ 'products.product.sold_out' | t }}
               {%- else -%}
-                {{ 'products.product.add_to_cart' | t }}
+                {{ 'products.product.add_to_cart' | t | replace: 'Add to cart', 'FREE MY KNEES' | replace: 'add to cart', 'FREE MY KNEES' }}
               {%- endif -%}
             </span>
             {%- render 'loading-spinner' -%}

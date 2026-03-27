@@ -195,7 +195,9 @@
                 {%- if product.description != blank -%}
                   <div class="product__description rte quick-add-hidden" {{ block.shopify_attributes }}>
                     {{ product.description }}
-                    {% render 'anti-gravity-diagnostic-snippet' %}
+                    {% if product.title contains 'Knee Massager' or product.handle contains 'knee-massager' %}
+                      {% render 'anti-gravity-diagnostic-snippet' %}
+                    {% endif %}
                   </div>
                 {%- endif -%}
               {%- when 'sku' -%}
