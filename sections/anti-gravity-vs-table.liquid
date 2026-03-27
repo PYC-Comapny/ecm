@@ -134,8 +134,8 @@
         <strong>DON'T WAIT!</strong> Prevent serious injuries and surgeries before they begin.
       </p>
       <div class="vs-cta-wrapper">
-        <a href="#MainProduct-{{ section.id }}" class="vs-cta-button cta-pulsing">
-          YES! I WANT PAIN-FREE KNEES
+        <a href="{{ section.settings.button_link | default: '#MainProduct-' | append: section.id }}" class="vs-cta-button button button--primary cta-pulsing">
+          {{ section.settings.button_label | default: 'YES! I WANT PAIN-FREE KNEES' }}
         </a>
       </div>
     </div>
@@ -181,23 +181,30 @@
   }
 
   .vs-cta-button {
-    display: inline-block;
-    background-color: #3cb371;
-    color: #ffffff;
-    padding: 18px 45px;
-    border-radius: 50px;
-    font-size: 18px;
-    font-weight: 900;
+    background-color: #3cb371 !important;
+    color: #ffffff !important;
+    padding: 15px 45px !important;
+    border-radius: 50px !important;
+    font-size: 1.8rem !important;
+    font-weight: 900 !important;
     text-decoration: none;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     transition: transform 0.2s ease, background-color 0.2s ease;
     box-shadow: 0 10px 25px rgba(60, 179, 113, 0.3);
+    border: none;
+    min-width: 300px;
+    cursor: pointer;
+    line-height: 1.2;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .vs-cta-button:hover {
     background-color: #2e8b57;
     transform: scale(1.02);
+    color: #ffffff !important;
   }
 
   .vs-cta-wrapper {
@@ -382,13 +389,33 @@
       font-size: 11px;
       white-space: normal;
     }
+
+    .vs-cta-button {
+      width: 100%;
+      min-width: unset;
+      padding: 18px 20px;
+      font-size: 16px;
+    }
   }
 </style>
 
 {% schema %}
 {
   "name": "Comparison VS Table",
-  "settings": [],
+  "settings": [
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "YES! I WANT PAIN-FREE KNEES"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link",
+      "info": "Leave blank to scroll to product selector"
+    }
+  ],
   "presets": [
     {
       "name": "Comparison VS Table",
