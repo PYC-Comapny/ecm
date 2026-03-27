@@ -1,13 +1,5 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
+  "layout": "funnel",
   "sections": {
     "rich_text_JVCAjx": {
       "type": "rich-text",
@@ -33,13 +25,16 @@
         "padding_bottom": 8
       }
     },
+    "premium_icon_bar": {
+      "type": "premium-icon-bar"
+    },
     "rich_text_9wfgYX": {
       "type": "rich-text",
       "blocks": {
         "caption_8kYRnY": {
           "type": "caption",
           "settings": {
-            "caption": "\"Become Capable\"",
+            "caption": "Relive Your Knee Pain In 10 minutes",
             "text_style": "caption-with-letter-spacing",
             "text_size": "medium"
           }
@@ -47,8 +42,8 @@
         "button_fMAhaA": {
           "type": "button",
           "settings": {
-            "button_label": "Button label",
-            "button_link": "",
+            "button_label": "FREE MY KNEES",
+            "button_link": "#MainProduct-main",
             "button_style_secondary": false,
             "button_label_2": "",
             "button_link_2": "",
@@ -94,21 +89,12 @@
             "text_style": "caption-with-letter-spacing",
             "text_size": "small"
           }
-        },
-        "button_64t6nJ": {
-          "type": "button",
-          "settings": {
-            "button_label": "Button label",
-            "button_link": "",
-            "button_style_secondary": false
-          }
         }
       },
       "block_order": [
         "heading_j7r3fd",
         "text_CNJj6W",
-        "caption_nnFrjK",
-        "button_64t6nJ"
+        "caption_nnFrjK"
       ],
       "name": "t:sections.image-with-text.presets.name",
       "settings": {
@@ -177,43 +163,10 @@
         "padding_bottom": 20
       }
     },
-    "image_with_text_nWXqUF": {
-      "type": "image-with-text",
-      "blocks": {
-        "heading_pF7CM4": {
-          "type": "heading",
-          "settings": {
-            "heading": "How To use",
-            "heading_size": "h1"
-          }
-        },
-        "text_x7XVVk": {
-          "type": "text",
-          "settings": {
-            "text": "<p><strong>1. </strong>Ajust to your knee.<br/><strong>2. </strong>Power on.<br/><strong>3. </strong>Choose heat, vibration, and light levels<strong><br/>4.</strong> Relax for 10 minutes while it works.<br/><strong>5. </strong>Remove on your own decision.</p><p><strong>That’s it. Simplicity is the Key. </strong>✅</p>",
-            "text_style": "body"
-          }
-        }
-      },
-      "block_order": [
-        "heading_pF7CM4",
-        "text_x7XVVk"
-      ],
-      "name": "t:sections.image-with-text.presets.name",
+    "anti_gravity_how_to": {
+      "type": "anti-gravity-how-to-use",
       "settings": {
-        "image": "shopify://shop_images/Untitled_design_3_1.gif",
-        "height": "large",
-        "desktop_image_width": "medium",
-        "layout": "image_first",
-        "image_behavior": "none",
-        "content_layout": "no-overlap",
-        "desktop_content_position": "middle",
-        "desktop_content_alignment": "center",
-        "mobile_content_alignment": "center",
-        "section_color_scheme": "scheme-156b13b9-b85d-4aea-b2d5-bc69b8208eff",
-        "color_scheme": "scheme-156b13b9-b85d-4aea-b2d5-bc69b8208eff",
-        "padding_top": 36,
-        "padding_bottom": 36
+        "image": "shopify://shop_images/Untitled_design_3_1.gif"
       }
     },
     "vitals_c3ee5db1_tUQb6F": {
@@ -259,256 +212,93 @@
         "vertical_margin_mobile": 0
       }
     },
-    "image_with_text_NBEpNf": {
-      "type": "image-with-text",
-      "blocks": {
-        "text_m4TEhk": {
-          "type": "text",
-          "settings": {
-            "text": "<ul><li><strong>Targets</strong> S<em>pecific</em> Needs</li><li><strong>Extended</strong> Velcro Straps</li><li><strong>Lightweight</strong> & Portable</li><li><strong>3</strong> Heating Levels</li><li><strong>3</strong> Vibration Levels</li><li><strong>Red Light</strong> Therapy</li></ul>",
-            "text_style": "body"
-          }
-        }
-      },
-      "block_order": [
-        "text_m4TEhk"
-      ],
-      "name": "t:sections.image-with-text.presets.name",
+    "ag_cta_new": {
+      "type": "ag-cta",
       "settings": {
-        "image": "shopify://shop_images/Untitled_design.gif",
-        "height": "adapt",
-        "desktop_image_width": "medium",
-        "layout": "text_first",
-        "image_behavior": "none",
-        "content_layout": "no-overlap",
-        "desktop_content_position": "middle",
-        "desktop_content_alignment": "center",
-        "mobile_content_alignment": "left",
-        "section_color_scheme": "",
-        "color_scheme": "",
-        "padding_top": 36,
-        "padding_bottom": 36
+        "heading": "Ready For Some Pain Relief?",
+        "subheading": "",
+        "button_label": "FREE MY KNEES",
+        "button_link": "#MainProduct-main",
+        "trust_text": "✓ 30-Day Money Back Guarantee"
       }
     },
-    "image_with_text_dVK7bT": {
-      "type": "image-with-text",
-      "name": "t:sections.image-with-text.presets.name",
-      "settings": {
-        "image": "shopify://shop_images/Screenshot_2025-12-13_172711.png",
-        "height": "small",
-        "desktop_image_width": "medium",
-        "layout": "image_first",
-        "image_behavior": "none",
-        "content_layout": "no-overlap",
-        "desktop_content_position": "top",
-        "desktop_content_alignment": "left",
-        "mobile_content_alignment": "left",
-        "section_color_scheme": "",
-        "color_scheme": "",
-        "padding_top": 8,
-        "padding_bottom": 8
-      }
-    },
-    "image_with_text_66MeqQ": {
-      "type": "image-with-text",
+    "ag_faq_new": {
+      "type": "ag-faq",
       "blocks": {
-        "text_TpAdQ8": {
-          "type": "text",
+        "faq_1": {
+          "type": "question",
           "settings": {
-            "text": "<ul><li><strong>ENDLESS POSSIBILITIES  </strong>Shoulders, Elbows, and Heels.</li><li><strong>DON'T WAIT! </strong>Prevent serious injuries and surgeries before they begin.</li><li><strong>RELIEVE YOUR KNEES </strong> Reduce joint, bone on bone, pain, stiffness, swelling and stress build up.</li><li><strong>GET MOBILITY BACK! </strong>Move freely, resume your daily activities comfortably.</li></ul>",
-            "text_style": "body"
+            "question": "How long does it take to feel results?",
+            "answer": "<p>Most users experience significant relief and a \"soothing\" sensation within the first 10 minutes of use. For long-standing chronic pain, we recommend consistent use (15 minutes a day) for at least 7-14 days to see lasting improvements in mobility.<\/p>"
           }
         },
-        "button_4a8ihw": {
-          "type": "button",
+        "faq_2": {
+          "type": "question",
           "settings": {
-            "button_label": "Button label",
-            "button_link": "",
-            "button_style_secondary": false
-          }
-        }
-      },
-      "block_order": [
-        "text_TpAdQ8",
-        "button_4a8ihw"
-      ],
-      "name": "t:sections.image-with-text.presets.name",
-      "settings": {
-        "image": "shopify://shop_images/1_1.webp",
-        "height": "adapt",
-        "desktop_image_width": "small",
-        "layout": "text_first",
-        "image_behavior": "none",
-        "content_layout": "no-overlap",
-        "desktop_content_position": "top",
-        "desktop_content_alignment": "left",
-        "mobile_content_alignment": "center",
-        "section_color_scheme": "",
-        "color_scheme": "",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
-    "rich_text_ggHFyt": {
-      "type": "rich-text",
-      "blocks": {
-        "text_jxQBtL": {
-          "type": "text",
-          "settings": {
-            "text": "<h1><strong>WHAT OUR CUSTOMERS SAY</strong></h1>"
-          }
-        }
-      },
-      "block_order": [
-        "text_jxQBtL"
-      ],
-      "name": "t:sections.rich-text.presets.name",
-      "settings": {
-        "desktop_content_position": "center",
-        "content_alignment": "center",
-        "color_scheme": "scheme-5914609d-643e-4c60-9316-611a49b3c419",
-        "full_width": true,
-        "padding_top": 0,
-        "padding_bottom": 0
-      }
-    },
-    "rich_text_RAhLX8": {
-      "type": "rich-text",
-      "blocks": {
-        "heading_gai4Uy": {
-          "type": "heading",
-          "settings": {
-            "heading": "\"This thing is amazing.\"",
-            "heading_size": "h2"
+            "question": "Does it fit all knee sizes?",
+            "answer": "<p>Absolutely. The massager features high-quality, adjustable velcro straps that ensure a snug, ergonomic fit for any leg size—from small to extra-large—providing stable compression without slipping.<\/p>"
           }
         },
-        "text_pM69x7": {
-          "type": "text",
+        "faq_3": {
+          "type": "question",
           "settings": {
-            "text": "<p>\"I have been a dance teacher for many years and<strong> my knees are definitely not what they used to be</strong>. This Knee massager is <strong>fantastic and not only provides relief during the process but also increases mobility after the fact. 10 mins on each knee once a day and I already notice a difference. Well worth it\"</strong></p>"
-          }
-        }
-      },
-      "block_order": [
-        "heading_gai4Uy",
-        "text_pM69x7"
-      ],
-      "disabled": true,
-      "name": "t:sections.rich-text.presets.name",
-      "settings": {
-        "desktop_content_position": "center",
-        "content_alignment": "center",
-        "color_scheme": "scheme-156b13b9-b85d-4aea-b2d5-bc69b8208eff",
-        "full_width": true,
-        "padding_top": 0,
-        "padding_bottom": 0
-      }
-    },
-    "rich_text_aHrm9n": {
-      "type": "rich-text",
-      "blocks": {
-        "heading_iF9cgM": {
-          "type": "heading",
-          "settings": {
-            "heading": "Do You Relate?",
-            "heading_size": "h1"
+            "question": "Can I use this for Arthritis, Meniscus Tears, or Post-Surgery recovery?",
+            "answer": "<p>Yes. The Ultra Knee Massager is specifically engineered to support recovery from these conditions by increasing oxygenated blood flow and reducing internal inflammation. However, we always recommend consulting with your physician if you are recovering from recent surgery.<\/p>"
           }
         },
-        "text_GJETWy": {
-          "type": "text",
+        "faq_4": {
+          "type": "question",
           "settings": {
-            "text": "<p>Imagine being able to<strong> relieve your chronic pains, stiffness, swelling</strong> <strong>from </strong>the comfort of <strong>your home – in just a few minutes</strong> – <strong>without </strong>taking <strong>painkillers</strong> or <strong>expensive  lengthy therapy</strong>…<br/><br/><strong>There is so much more out there in life</strong>, however it requires mobility, no one wants to carry one another. Everyone wants to enjoy the beauty of life and its special moments. It requires moving, <strong>having somthing in which prevents the moving is a big problem.</strong><br/><br/>Premium Heals isn't just a store for your health, its a team that solved the problem, from what started as issues in all our families to trying everything from A-Z, surgeries, therapy, medication, and so much more. <strong>We lost some important people in our lives. We don't want that for you and your loved ones.</strong></p><p><strong>It took a while until we found the solutions, trial after trial. Product researches, doctors and so much time. We finally found somthing...</strong></p><p><strong>For the first time in moderation, your able to heal your problems from the good of your home without the need of</strong> taking drugs, spending time for therapy that would throw you if you didn't pay and surgeries that simply put you out for as long as its needed. <br/></p>"
-          }
-        }
-      },
-      "block_order": [
-        "heading_iF9cgM",
-        "text_GJETWy"
-      ],
-      "disabled": true,
-      "name": "t:sections.rich-text.presets.name",
-      "settings": {
-        "desktop_content_position": "center",
-        "content_alignment": "center",
-        "color_scheme": "scheme-156b13b9-b85d-4aea-b2d5-bc69b8208eff",
-        "full_width": true,
-        "padding_top": 40,
-        "padding_bottom": 52
-      }
-    },
-    "image_with_text_zAQdCQ": {
-      "type": "image-with-text",
-      "blocks": {
-        "heading_JiXcGN": {
-          "type": "heading",
-          "settings": {
-            "heading": "<strong>\"This is one of the best things I’ve bought in a long time.\"</strong>",
-            "heading_size": "h2"
+            "question": "What if it doesn\u2019t work for me?",
+            "answer": "<p>We stand by our results. That\u2019s why we offer a 30-Day Money-Back Guarantee. If your knees don't feel better within 30 days, simply contact our support team for a full, hassle-free refund.<\/p>"
           }
         },
-        "text_MFJ6EF": {
-          "type": "text",
+        "faq_5": {
+          "type": "question",
           "settings": {
-            "text": "<p>I'm a sixty one year old carpenter/building contractor , <strong>knees are bone on bone, left one became so stiff couldn't bend it , have been waiting for knee replacement for two years</strong>, I received the Ultra Knee Massager and used on each knee for the auto timed <strong>10 minutes, saw results immediately</strong>, been using for a week now and have <strong>had three friends with knee problems try mine and all three have noticed some relief after only 1 minutes and have all ordered one. relief is absolutely amazing.</strong></p>",
-            "text_style": "body"
+            "question": "Can I use it on both knees?",
+            "answer": "<p>While our current offer is for a single unit, many customers find that alternating knees works perfectly. However, for severe bilateral pain, we highly recommend purchasing two units to save time and treat both knees simultaneously\u2014most customers find this much more convenient for deep recovery sessions.<\/p>"
+          }
+        },
+        "faq_6": {
+          "type": "question",
+          "settings": {
+            "question": "How does the Heat Therapy work?",
+            "answer": "<p>The device uses advanced infrared heating elements that penetrate deep into the joint tissue. It offers three precise temperature settings, ranging from soothing warmth to deep therapeutic heat, to \"oil\" your joints and melt away morning stiffness.<\/p>"
+          }
+        },
+        "faq_7": {
+          "type": "question",
+          "settings": {
+            "question": "Is it rechargeable or does it need to be plugged in?",
+            "answer": "<p>It is fully cordless and rechargeable! Each charge provides up to 2-3 hours of continuous therapy, allowing you to use it while relaxing on the couch, working at your desk, or even while traveling.<\/p>"
+          }
+        },
+        "faq_8": {
+          "type": "question",
+          "settings": {
+            "question": "Is it easy to operate for seniors?",
+            "answer": "<p>Yes, we designed the interface to be \"one-touch simple.\" The large, clear LED display and tactile buttons make it easy to start your session and adjust settings without any complicated tech.<\/p>"
           }
         }
       },
       "block_order": [
-        "heading_JiXcGN",
-        "text_MFJ6EF"
-      ],
-      "disabled": true,
-      "name": "t:sections.image-with-text.presets.name",
-      "settings": {
-        "image": "shopify://shop_images/2_2080cbb0-505a-486a-8604-9424f482b460.webp",
-        "height": "adapt",
-        "desktop_image_width": "medium",
-        "layout": "image_first",
-        "image_behavior": "none",
-        "content_layout": "no-overlap",
-        "desktop_content_position": "top",
-        "desktop_content_alignment": "left",
-        "mobile_content_alignment": "left",
-        "section_color_scheme": "",
-        "color_scheme": "",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6",
+        "faq_7",
+        "faq_8"
+      ]
     },
-    "image_banner_dkqwzt": {
-      "type": "image-banner",
-      "blocks": {
-        "buttons_bC8MHF": {
-          "type": "buttons",
-          "settings": {
-            "button_label_1": "GET IT",
-            "button_link_1": "shopify://products/ultra-knee-massager",
-            "button_style_secondary_1": false,
-            "button_label_2": "",
-            "button_link_2": "shopify://products/ultra-knee-massager",
-            "button_style_secondary_2": false
-          }
-        }
-      },
-      "block_order": [
-        "buttons_bC8MHF"
-      ],
-      "disabled": true,
-      "name": "t:sections.image-banner.presets.name",
-      "settings": {
-        "image": "shopify://shop_images/Screenshot_2025-12-07_175328.png",
-        "image_overlay_opacity": 0,
-        "image_height": "adapt",
-        "image_behavior": "none",
-        "desktop_content_position": "middle-center",
-        "desktop_content_alignment": "center",
-        "show_text_box": false,
-        "color_scheme": "scheme-156b13b9-b85d-4aea-b2d5-bc69b8208eff",
-        "stack_images_on_mobile": true,
-        "mobile_content_alignment": "left",
-        "show_text_below": true
-      }
+    "anti_gravity_vs_table": {
+      "type": "anti-gravity-vs-table"
+    },
+    "anti_gravity_features": {
+      "type": "anti-gravity-features",
+      "settings": {}
     },
     "custom_liquid_KHJMAV": {
       "type": "custom-liquid",
@@ -518,25 +308,6 @@
         "color_scheme": "",
         "padding_top": 40,
         "padding_bottom": 52
-      }
-    },
-    "related-products": {
-      "type": "related-products",
-      "disabled": true,
-      "settings": {
-        "heading": "Other industry favorites",
-        "heading_size": "h2",
-        "products_to_show": 5,
-        "columns_desktop": 5,
-        "columns_mobile": "2",
-        "color_scheme": "scheme-1",
-        "image_ratio": "adapt",
-        "image_shape": "default",
-        "show_secondary_image": false,
-        "show_vendor": false,
-        "show_rating": false,
-        "padding_top": 36,
-        "padding_bottom": 44
       }
     },
     "custom_liquid_NkNckR": {
@@ -553,20 +324,16 @@
   "order": [
     "rich_text_JVCAjx",
     "rich_text_9wfgYX",
+    "premium_icon_bar",
     "image_with_text_6684ri",
     "main",
-    "image_with_text_nWXqUF",
+    "anti_gravity_how_to",
+    "anti_gravity_features",
+    "ag_cta_new",
+    "anti_gravity_vs_table",
     "vitals_c3ee5db1_tUQb6F",
-    "image_with_text_NBEpNf",
-    "image_with_text_dVK7bT",
-    "image_with_text_66MeqQ",
-    "rich_text_ggHFyt",
-    "rich_text_RAhLX8",
-    "rich_text_aHrm9n",
-    "image_with_text_zAQdCQ",
-    "image_banner_dkqwzt",
+    "ag_faq_new",
     "custom_liquid_KHJMAV",
-    "related-products",
     "custom_liquid_NkNckR"
   ]
 }

@@ -1,0 +1,231 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="ag-faq-section section-{{ section.id }}-padding">
+  <div class="page-width">
+    {%- if section.settings.title != blank -%}
+      <div class="ag-faq-header text-center">
+        <h2 class="ag-faq-title">{{ section.settings.title | escape }}</h2>
+        {%- if section.settings.description != blank -%}
+          <p class="ag-faq-description">{{ section.settings.description | escape }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="ag-faq-container">
+      {%- for block in section.blocks -%}
+        <div class="ag-faq-item" {{ block.shopify_attributes }}>
+          <button class="ag-faq-trigger" aria-expanded="false" onclick="this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') === 'true' ? 'false' : 'true')">
+            <span class="ag-faq-question">{{ block.settings.question | escape }}</span>
+            <span class="ag-faq-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </span>
+          </button>
+          <div class="ag-faq-content">
+            <div class="ag-faq-answer">
+              {{ block.settings.answer }}
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+<style>
+  .ag-faq-section {
+    background-color: #fafafa;
+    border-top: 1px solid #f0f0f0;
+  }
+
+  .ag-faq-header {
+    margin-bottom: 40px;
+    text-align: center;
+  }
+
+  .ag-faq-title {
+    font-size: clamp(24px, 4vw, 36px);
+    font-weight: 900;
+    text-transform: uppercase;
+    font-style: italic;
+    color: #1F1F1F;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .ag-faq-description {
+     font-size: 14px;
+     color: #6b7280;
+     margin-top: 8px;
+     font-weight: 600;
+     text-align: center;
+  }
+
+  .ag-faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .ag-faq-item {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    transition: box-shadow 0.2s ease;
+  }
+
+  .ag-faq-item:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+
+  .ag-faq-trigger {
+    width: 100%;
+    padding: 20px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    outline: none;
+  }
+
+  .ag-faq-question {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1F1F1F;
+    line-height: 1.4;
+  }
+
+  .ag-faq-icon {
+    color: #94a3b8;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    flex-shrink: 0;
+    margin-left: 15px;
+  }
+
+  .ag-faq-trigger[aria-expanded="true"] .ag-faq-icon {
+    transform: rotate(180deg);
+    color: #3cb371;
+  }
+
+  .ag-faq-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .ag-faq-trigger[aria-expanded="true"] + .ag-faq-content {
+    max-height: 500px;
+  }
+
+  .ag-faq-answer {
+    padding: 0 24px 20px;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #4b5563;
+  }
+
+  .ag-faq-answer strong {
+    color: #1F1F1F;
+  }
+
+  @media (max-width: 749px) {
+    .ag-faq-trigger {
+      padding: 18px 20px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "AG Premium FAQ",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Frequently Asked Questions"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Sub-title",
+      "default": "Everything You Need to Know"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "How long does it take to see results?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>Many users report immediate relief after their first 10-minute session. Significant long-term improvements in mobility and chronic pain reduction are typically seen within 7-14 days of consistent use.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "AG Premium FAQ",
+      "blocks": [
+        {
+          "type": "question"
+        },
+        {
+          "type": "question"
+        },
+        {
+          "type": "question"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

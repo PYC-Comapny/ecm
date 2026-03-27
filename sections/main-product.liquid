@@ -195,6 +195,7 @@
                 {%- if product.description != blank -%}
                   <div class="product__description rte quick-add-hidden" {{ block.shopify_attributes }}>
                     {{ product.description }}
+                    {% render 'anti-gravity-diagnostic-snippet' %}
                   </div>
                 {%- endif -%}
               {%- when 'sku' -%}

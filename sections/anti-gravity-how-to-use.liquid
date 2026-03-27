@@ -1,0 +1,191 @@
+<section class="how-to-use-section" id="how-to-use">
+  <div class="how-to-use-container">
+    
+    <!-- Header: Matches exact casing and theme style -->
+    <div class="how-to-use-header">
+      <h2 class="how-to-use-title">
+        How It works In <span class="highlight">3 Steps</span>
+      </h2>
+    </div>
+
+    <!-- Process Container -->
+    <div class="process-wrapper">
+      <div class="steps-grid">
+        
+        <!-- Step 1 Card -->
+        <div class="step-card">
+          <div class="step-number">01</div>
+          <div class="step-icon-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2b2c2d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+              <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+              <line x1="12" y1="11" x2="12" y2="11.01"></line>
+              <line x1="12" y1="16" x2="12" y2="16.01"></line>
+            </svg>
+          </div>
+          <div class="step-content">
+            <h3 class="step-title">Strap and adjust</h3>
+          </div>
+        </div>
+
+        <!-- Step 2 Card -->
+        <div class="step-card">
+          <div class="step-number">02</div>
+          <div class="step-icon-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2b2c2d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+            </svg>
+          </div>
+          <div class="step-content">
+            <h3 class="step-title">Set Heat & Vibration</h3>
+          </div>
+        </div>
+
+        <!-- Step 3 Card -->
+        <div class="step-card">
+          <div class="step-number">03</div>
+          <div class="step-icon-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2b2c2d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+          </div>
+          <div class="step-content">
+            <h3 class="step-title">Wear for 10 minutes</h3>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .how-to-use-section {
+    padding: 3.5rem 0;
+    background-color: #ffffff;
+    font-family: var(--font-body-family, "Nunito Sans"), sans-serif;
+  }
+
+  .how-to-use-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .how-to-use-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+
+  .how-to-use-title {
+    font-size: clamp(24px, 4vw, 36px);
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: #2b2c2d;
+    margin: 0;
+    /* Removed text-transform: uppercase and font-style: italic to match standard theme headers better */
+  }
+
+  .how-to-use-title .highlight {
+    color: #3cb371;
+  }
+
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .step-card {
+    background: #ffffff;
+    border-radius: 8px; /* Theme card radius */
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .step-card:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04);
+    transform: translateY(-2px);
+  }
+
+  .step-number {
+    position: absolute;
+    top: 1rem;
+    right: 1.25rem;
+    font-size: 40px;
+    font-weight: 800;
+    font-style: italic;
+    color: #f7f7f7;
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .step-icon-box {
+    width: 44px;
+    height: 44px;
+    background: #ffffff;
+    border: 1.5px solid #f0f0f0;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .step-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #2b2c2d;
+    margin: 0;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  @media (max-width: 989px) {
+    .step-title {
+      font-size: 14px;
+    }
+  }
+
+  @media (max-width: 749px) {
+    .how-to-use-section {
+      padding: 2.5rem 0;
+    }
+    .steps-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    .step-card {
+      padding: 2rem 1rem;
+    }
+    .step-title {
+      white-space: normal;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "How To Use 3-Step",
+  "settings": [],
+  "presets": [
+    {
+      "name": "How To Use 3-Step"
+    }
+  ]
+}
+{% endschema %}
