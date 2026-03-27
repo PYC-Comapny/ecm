@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "layout": "theme.funnel",
   "sections": {
@@ -25,9 +34,6 @@
         "padding_bottom": 8
       }
     },
-    "premium_icon_bar": {
-      "type": "premium-icon-bar"
-    },
     "rich_text_9wfgYX": {
       "type": "rich-text",
       "blocks": {
@@ -43,7 +49,7 @@
           "type": "button",
           "settings": {
             "button_label": "FREE MY KNEES",
-            "button_link": "#MainProduct-main",
+            "button_link": "shopify://products/ultra-knee-massager",
             "button_style_secondary": false,
             "button_label_2": "",
             "button_link_2": "",
@@ -64,6 +70,10 @@
         "padding_top": 0,
         "padding_bottom": 4
       }
+    },
+    "premium_icon_bar": {
+      "type": "premium-icon-bar",
+      "settings": {}
     },
     "image_with_text_6684ri": {
       "type": "image-with-text",
@@ -165,9 +175,25 @@
     },
     "anti_gravity_how_to": {
       "type": "anti-gravity-how-to-use",
+      "settings": {}
+    },
+    "anti_gravity_features": {
+      "type": "anti-gravity-features",
+      "settings": {}
+    },
+    "ag_cta_new": {
+      "type": "ag-cta",
       "settings": {
-        "image": "shopify://shop_images/Untitled_design_3_1.gif"
+        "heading": "Ready For Some Pain Relief?",
+        "subheading": "",
+        "button_label": "FREE MY KNEES",
+        "button_link": "shopify://products/ultra-knee-massager",
+        "trust_text": "✓ 30-Day Money Back Guarantee"
       }
+    },
+    "anti_gravity_vs_table": {
+      "type": "anti-gravity-vs-table",
+      "settings": {}
     },
     "vitals_c3ee5db1_tUQb6F": {
       "type": "vitals-c3ee5db1",
@@ -212,16 +238,6 @@
         "vertical_margin_mobile": 0
       }
     },
-    "ag_cta_new": {
-      "type": "ag-cta",
-      "settings": {
-        "heading": "Ready For Some Pain Relief?",
-        "subheading": "",
-        "button_label": "FREE MY KNEES",
-        "button_link": "#MainProduct-main",
-        "trust_text": "✓ 30-Day Money Back Guarantee"
-      }
-    },
     "ag_faq_new": {
       "type": "ag-faq",
       "blocks": {
@@ -229,56 +245,56 @@
           "type": "question",
           "settings": {
             "question": "How long does it take to feel results?",
-            "answer": "<p>Most users experience significant relief and a \"soothing\" sensation within the first 10 minutes of use. For long-standing chronic pain, we recommend consistent use (15 minutes a day) for at least 7-14 days to see lasting improvements in mobility.<\/p>"
+            "answer": "<p>Most users experience significant relief and a \"soothing\" sensation within the first 10 minutes of use. For long-standing chronic pain, we recommend consistent use (15 minutes a day) for at least 7-14 days to see lasting improvements in mobility.</p>"
           }
         },
         "faq_2": {
           "type": "question",
           "settings": {
             "question": "Does it fit all knee sizes?",
-            "answer": "<p>Absolutely. The massager features high-quality, adjustable velcro straps that ensure a snug, ergonomic fit for any leg size—from small to extra-large—providing stable compression without slipping.<\/p>"
+            "answer": "<p>Absolutely. The massager features high-quality, adjustable velcro straps that ensure a snug, ergonomic fit for any leg size—from small to extra-large—providing stable compression without slipping.</p>"
           }
         },
         "faq_3": {
           "type": "question",
           "settings": {
             "question": "Can I use this for Arthritis, Meniscus Tears, or Post-Surgery recovery?",
-            "answer": "<p>Yes. The Ultra Knee Massager is specifically engineered to support recovery from these conditions by increasing oxygenated blood flow and reducing internal inflammation. However, we always recommend consulting with your physician if you are recovering from recent surgery.<\/p>"
+            "answer": "<p>Yes. The Ultra Knee Massager is specifically engineered to support recovery from these conditions by increasing oxygenated blood flow and reducing internal inflammation. However, we always recommend consulting with your physician if you are recovering from recent surgery.</p>"
           }
         },
         "faq_4": {
           "type": "question",
           "settings": {
-            "question": "What if it doesn\u2019t work for me?",
-            "answer": "<p>We stand by our results. That\u2019s why we offer a 30-Day Money-Back Guarantee. If your knees don't feel better within 30 days, simply contact our support team for a full, hassle-free refund.<\/p>"
+            "question": "What if it doesn’t work for me?",
+            "answer": "<p>We stand by our results. That’s why we offer a 30-Day Money-Back Guarantee. If your knees don't feel better within 30 days, simply contact our support team for a full, hassle-free refund.</p>"
           }
         },
         "faq_5": {
           "type": "question",
           "settings": {
             "question": "Can I use it on both knees?",
-            "answer": "<p>While our current offer is for a single unit, many customers find that alternating knees works perfectly. However, for severe bilateral pain, we highly recommend purchasing two units to save time and treat both knees simultaneously\u2014most customers find this much more convenient for deep recovery sessions.<\/p>"
+            "answer": "<p>While our current offer is for a single unit, many customers find that alternating knees works perfectly. However, for severe bilateral pain, we highly recommend purchasing two units to save time and treat both knees simultaneously—most customers find this much more convenient for deep recovery sessions.</p>"
           }
         },
         "faq_6": {
           "type": "question",
           "settings": {
             "question": "How does the Heat Therapy work?",
-            "answer": "<p>The device uses advanced infrared heating elements that penetrate deep into the joint tissue. It offers three precise temperature settings, ranging from soothing warmth to deep therapeutic heat, to \"oil\" your joints and melt away morning stiffness.<\/p>"
+            "answer": "<p>The device uses advanced infrared heating elements that penetrate deep into the joint tissue. It offers three precise temperature settings, ranging from soothing warmth to deep therapeutic heat, to \"oil\" your joints and melt away morning stiffness.</p>"
           }
         },
         "faq_7": {
           "type": "question",
           "settings": {
             "question": "Is it rechargeable or does it need to be plugged in?",
-            "answer": "<p>It is fully cordless and rechargeable! Each charge provides up to 2-3 hours of continuous therapy, allowing you to use it while relaxing on the couch, working at your desk, or even while traveling.<\/p>"
+            "answer": "<p>It is fully cordless and rechargeable! Each charge provides up to 2-3 hours of continuous therapy, allowing you to use it while relaxing on the couch, working at your desk, or even while traveling.</p>"
           }
         },
         "faq_8": {
           "type": "question",
           "settings": {
             "question": "Is it easy to operate for seniors?",
-            "answer": "<p>Yes, we designed the interface to be \"one-touch simple.\" The large, clear LED display and tactile buttons make it easy to start your session and adjust settings without any complicated tech.<\/p>"
+            "answer": "<p>Yes, we designed the interface to be \"one-touch simple.\" The large, clear LED display and tactile buttons make it easy to start your session and adjust settings without any complicated tech.</p>"
           }
         }
       },
@@ -291,14 +307,13 @@
         "faq_6",
         "faq_7",
         "faq_8"
-      ]
-    },
-    "anti_gravity_vs_table": {
-      "type": "anti-gravity-vs-table"
-    },
-    "anti_gravity_features": {
-      "type": "anti-gravity-features",
-      "settings": {}
+      ],
+      "settings": {
+        "title": "Frequently Asked Questions",
+        "description": "Everything You Need to Know",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     },
     "custom_liquid_KHJMAV": {
       "type": "custom-liquid",
