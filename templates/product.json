@@ -151,13 +151,13 @@
             "subtitle": "Best Value Recovery",
             "price": "$189.99",
             "compare_at_price": "$329.99",
-            "item_tags": "2x Massager, 2x Gel, 2x Brace",
+            "item_tags": "2x Massagers, 1x Brace",
             "product_1": "ultra-knee-massager",
-            "qty_1": 2,
+            "qty_1": 1,
             "product_2": "premium-copression-knee-sleeve",
-            "qty_2": 2,
-            "product_3": "knee-pain-relief-gel",
-            "qty_3": 2
+            "qty_2": 1,
+            "product_3": "",
+            "qty_3": 0
           }
         },
         "bundle_2": {
@@ -168,13 +168,13 @@
             "subtitle": "Full Kit + Savings",
             "price": "$129.99",
             "compare_at_price": "$229.99",
-            "item_tags": "1x Massager, 1x Gel, 1x Brace",
+            "item_tags": "2x Massager, 2x Gel, 2x Brace",
             "product_1": "ultra-knee-massager",
-            "qty_1": 1,
+            "qty_1": 2,
             "product_2": "premium-copression-knee-sleeve",
-            "qty_2": 1,
+            "qty_2": 2,
             "product_3": "knee-pain-relief-gel",
-            "qty_3": 1
+            "qty_3": 2
           }
         },
         "benefit_1": {
