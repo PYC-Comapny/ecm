@@ -135,7 +135,7 @@
             "price": "$104.99",
             "compare_at_price": "$134.99",
             "item_tags": "1x Ultra Knee Massager",
-            "product_1": "",
+            "product_1": "ultra-knee-massager",
             "qty_1": 1,
             "product_2": "",
             "qty_2": 1,
@@ -275,6 +275,7 @@
         "quantity_selector_GnTGbL",
         "description"
       ],
+      "disabled": true,
       "settings": {
         "enable_sticky_info": true,
         "color_scheme": "scheme-156b13b9-b85d-4aea-b2d5-bc69b8208eff",
