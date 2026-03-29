@@ -138,26 +138,9 @@
             "product_1": "ultra-knee-massager",
             "qty_1": 1,
             "product_2": "",
-            "qty_2": 1,
+            "qty_2": 0,
             "product_3": "",
-            "qty_3": 1
-          }
-        },
-        "bundle_2": {
-          "type": "bundle_option",
-          "settings": {
-            "is_popular": true,
-            "title": "Bundle Deal",
-            "subtitle": "Full Kit + Savings",
-            "price": "$129.99",
-            "compare_at_price": "$229.99",
-            "item_tags": "1x Massager, 1x Gel, 1x Brace",
-            "product_1": "ultra-knee-massager",
-            "qty_1": 1,
-            "product_2": "premium-copression-knee-sleeve",
-            "qty_2": 1,
-            "product_3": "knee-pain-relief-gel",
-            "qty_3": 1
+            "qty_3": 0
           }
         },
         "bundle_3": {
@@ -175,6 +158,23 @@
             "qty_2": 2,
             "product_3": "knee-pain-relief-gel",
             "qty_3": 2
+          }
+        },
+        "bundle_2": {
+          "type": "bundle_option",
+          "settings": {
+            "is_popular": true,
+            "title": "Bundle Deal",
+            "subtitle": "Full Kit + Savings",
+            "price": "$129.99",
+            "compare_at_price": "$229.99",
+            "item_tags": "1x Massager, 1x Gel, 1x Brace",
+            "product_1": "ultra-knee-massager",
+            "qty_1": 1,
+            "product_2": "premium-copression-knee-sleeve",
+            "qty_2": 1,
+            "product_3": "knee-pain-relief-gel",
+            "qty_3": 1
           }
         },
         "benefit_1": {
@@ -219,8 +219,8 @@
       },
       "block_order": [
         "bundle_1",
-        "bundle_2",
         "bundle_3",
+        "bundle_2",
         "benefit_1",
         "benefit_2",
         "benefit_3",
