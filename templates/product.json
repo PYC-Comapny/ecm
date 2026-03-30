@@ -34,46 +34,43 @@
         "padding_bottom": 8
       }
     },
-    "rich_text_9wfgYX": {
-      "type": "rich-text",
+    "anti_gravity_how_to": {
+      "type": "ag-how-to-use",
       "blocks": {
-        "caption_8kYRnY": {
-          "type": "caption",
+        "step_1": {
+          "type": "step",
           "settings": {
-            "caption": "Relive Your Knee Pain In 10 minutes",
-            "text_style": "caption-with-letter-spacing",
-            "text_size": "medium"
+            "title": "Strap and adjust",
+            "icon_svg": ""
           }
         },
-        "button_fMAhaA": {
-          "type": "button",
+        "step_2": {
+          "type": "step",
           "settings": {
-            "button_label": "FREE MY KNEES",
-            "button_link": "#checkout-section",
-            "button_style_secondary": false,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "title": "Set Heat & Vibration",
+            "icon_svg": ""
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "title": "Wear for 10 minutes",
+            "icon_svg": ""
           }
         }
       },
       "block_order": [
-        "caption_8kYRnY",
-        "button_fMAhaA"
+        "step_1",
+        "step_2",
+        "step_3"
       ],
-      "name": "t:sections.rich-text.presets.name",
       "settings": {
-        "desktop_content_position": "center",
-        "content_alignment": "center",
-        "color_scheme": "scheme-156b13b9-b85d-4aea-b2d5-bc69b8208eff",
-        "full_width": true,
-        "padding_top": 0,
-        "padding_bottom": 4
+        "ag_heading": "How It works In 3 Steps",
+        "ag_show_desktop": true,
+        "ag_show_mobile": true,
+        "ag_font_h2": 36,
+        "ag_font_h2_mobile": 28
       }
-    },
-    "premium_icon_bar": {
-      "type": "premium-icon-bar",
-      "settings": {}
     },
     "image_with_text_6684ri": {
       "type": "image-with-text",
@@ -121,44 +118,6 @@
         "color_scheme": "scheme-156b13b9-b85d-4aea-b2d5-bc69b8208eff",
         "padding_top": 0,
         "padding_bottom": 0
-      }
-    },
-    "anti_gravity_how_to": {
-      "type": "ag-how-to-use",
-      "blocks": {
-        "step_1": {
-          "type": "step",
-          "settings": {
-            "title": "Strap and adjust",
-            "icon_svg": ""
-          }
-        },
-        "step_2": {
-          "type": "step",
-          "settings": {
-            "title": "Set Heat & Vibration",
-            "icon_svg": ""
-          }
-        },
-        "step_3": {
-          "type": "step",
-          "settings": {
-            "title": "Wear for 10 minutes",
-            "icon_svg": ""
-          }
-        }
-      },
-      "block_order": [
-        "step_1",
-        "step_2",
-        "step_3"
-      ],
-      "settings": {
-        "ag_heading": "How It works In 3 Steps",
-        "ag_show_desktop": true,
-        "ag_show_mobile": true,
-        "ag_font_h2": 36,
-        "ag_font_h2_mobile": 28
       }
     },
     "ag_optimized_offer_new": {
@@ -277,58 +236,46 @@
         "redirect_to_checkout": true
       }
     },
-    "main": {
-      "type": "main-product",
+    "rich_text_9wfgYX": {
+      "type": "rich-text",
       "blocks": {
-        "title": {
-          "type": "title",
-          "settings": {}
-        },
-        "price_8jTpY3": {
-          "type": "price",
-          "settings": {}
-        },
-        "buy_buttons_EkYytH": {
-          "type": "buy_buttons",
+        "caption_8kYRnY": {
+          "type": "caption",
           "settings": {
-            "show_dynamic_checkout": false,
-            "show_gift_card_recipient": true
+            "caption": "Relive Your Knee Pain In 10 minutes",
+            "text_style": "caption-with-letter-spacing",
+            "text_size": "medium"
           }
         },
-        "quantity_selector_GnTGbL": {
-          "type": "quantity_selector",
-          "settings": {}
-        },
-        "description": {
-          "type": "description",
+        "button_fMAhaA": {
+          "type": "button",
           "settings": {
-            "hide_content": false
+            "button_label": "FREE MY KNEES",
+            "button_link": "#checkout-section",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
           }
         }
       },
       "block_order": [
-        "title",
-        "price_8jTpY3",
-        "buy_buttons_EkYytH",
-        "quantity_selector_GnTGbL",
-        "description"
+        "caption_8kYRnY",
+        "button_fMAhaA"
       ],
-      "disabled": true,
+      "name": "t:sections.rich-text.presets.name",
       "settings": {
-        "enable_sticky_info": true,
+        "desktop_content_position": "center",
+        "content_alignment": "center",
         "color_scheme": "scheme-156b13b9-b85d-4aea-b2d5-bc69b8208eff",
-        "media_size": "small",
-        "constrain_to_viewport": false,
-        "media_fit": "cover",
-        "gallery_layout": "thumbnail",
-        "mobile_thumbnails": "show",
-        "media_position": "right",
-        "image_zoom": "lightbox",
-        "hide_variants": true,
-        "enable_video_looping": false,
-        "padding_top": 24,
-        "padding_bottom": 20
+        "full_width": true,
+        "padding_top": 0,
+        "padding_bottom": 4
       }
+    },
+    "premium_icon_bar": {
+      "type": "premium-icon-bar",
+      "settings": {}
     },
     "anti_gravity_features": {
       "type": "ag-features",
@@ -382,6 +329,59 @@
         "ag_show_mobile": true,
         "ag_font_h2": 36,
         "ag_font_h2_mobile": 28
+      }
+    },
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "price_8jTpY3": {
+          "type": "price",
+          "settings": {}
+        },
+        "buy_buttons_EkYytH": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": true
+          }
+        },
+        "quantity_selector_GnTGbL": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "description": {
+          "type": "description",
+          "settings": {
+            "hide_content": false
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "price_8jTpY3",
+        "buy_buttons_EkYytH",
+        "quantity_selector_GnTGbL",
+        "description"
+      ],
+      "disabled": true,
+      "settings": {
+        "enable_sticky_info": true,
+        "color_scheme": "scheme-156b13b9-b85d-4aea-b2d5-bc69b8208eff",
+        "media_size": "small",
+        "constrain_to_viewport": false,
+        "media_fit": "cover",
+        "gallery_layout": "thumbnail",
+        "mobile_thumbnails": "show",
+        "media_position": "right",
+        "image_zoom": "lightbox",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "padding_top": 24,
+        "padding_bottom": 20
       }
     },
     "ag_cta_new": {
@@ -771,12 +771,12 @@
   },
   "order": [
     "rich_text_JVCAjx",
-    "anti_gravity_how_to",
-    "anti_gravity_features",
-    "image_with_text_6684ri",
-    "ag_optimized_offer_new",
     "rich_text_9wfgYX",
     "premium_icon_bar",
+    "anti_gravity_how_to",
+    "image_with_text_6684ri",
+    "ag_optimized_offer_new",
+    "anti_gravity_features",
     "main",
     "ag_cta_new",
     "anti_gravity_vs_table",
