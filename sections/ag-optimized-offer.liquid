@@ -29,14 +29,12 @@
         {%- endform -%}
       </div>
 
-      <!-- Quantity Selector (As seen in image) -->
-      <div class="ag-offer__quantity-wrapper" style="margin-bottom: 25px; display: flex; align-items: center; gap: 15px;">
-        <span style="font-size: 14px; font-weight: 700; color: #4b5563;">Quantity:</span>
-        <div class="ag-qty-selector" style="display: flex; align-items: center; border: 1px solid #d1d5db; border-radius: 6px; overflow: hidden; width: fit-content; background: #fff;">
-          <button type="button" onclick="this.parentNode.querySelector('input').stepDown()" style="padding: 8px 15px; background: none; border: none; cursor: pointer; border-right: 1px solid #d1d5db; font-size: 18px;">-</button>
-          <input type="number" value="1" min="1" style="width: 50px; text-align: center; border: none; padding: 8px 0; font-weight: 700; background: none;">
-          <button type="button" onclick="this.parentNode.querySelector('input').stepUp()" style="padding: 8px 15px; background: none; border: none; cursor: pointer; border-left: 1px solid #d1d5db; font-size: 18px;">+</button>
-        </div>
+      {% comment %} 
+        Quantity Selector hidden because tiered bundles act as the quantity selection. 
+        Removing this avoids 'double-quantity' confusion (e.g. picking 2-device bundle and setting qty to 2).
+      {% endcomment %}
+      <div class="ag-offer__quantity-wrapper" style="display: none;">
+        <input type="number" value="1" class="ag-qty-hidden-fallback">
       </div>
 
       <!-- Bundle Selector -->
@@ -322,12 +320,10 @@
         if (!itemsJson) return;
         
         const items = JSON.parse(itemsJson);
-        const qtyInput = document.querySelector('.ag-qty-selector input');
-        const qty = parseInt(qtyInput ? qtyInput.value : 1);
         
         const finalItems = items.map(item => ({
           id: item.id,
-          quantity: item.quantity * qty
+          quantity: item.quantity
         }));
 
         this.classList.add('ag-bundle-card__button--loading');
