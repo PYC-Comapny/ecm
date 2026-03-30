@@ -434,6 +434,16 @@
   }
 } 
 
+/* Remove Vitals app injection if it targets this section */
+.ag-how-to .vitals-reviews,
+.ag-how-to .vitals-rating,
+.ag-how-to .vtls-rating,
+.ag-how-to .vtls-reviews,
+.ag-how-to [class*="vitals"],
+.ag-how-to [id*="vitals"] {
+  display: none !important;
+}
+
  
 /* 5. AG - Bundle Deals (ag-bundle-deals.liquid) */
 .ag-bundles {
