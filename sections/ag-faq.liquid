@@ -2,6 +2,8 @@
   .section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
     padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    --ag-title-size: {{ section.settings.ag_font_h2 }}px;
+    --ag-title-size-mobile: {{ section.settings.ag_font_h2_mobile }}px;
   }
 
   @media screen and (min-width: 750px) {
@@ -10,15 +12,27 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  {% if section.settings.ag_show_desktop == false %}
+    @media screen and (min-width: 750px) {
+      .section-{{ section.id }}.hide-desktop { display: none !important; }
+    }
+  {% endif %}
+
+  {% if section.settings.ag_show_mobile == false %}
+    @media screen and (max-width: 749px) {
+      .section-{{ section.id }}.hide-mobile { display: none !important; }
+    }
+  {% endif %}
 {%- endstyle -%}
 
-<div class="ag-faq-section section-{{ section.id }}-padding">
+<div class="ag-faq-section section-{{ section.id }} section-{{ section.id }}-padding {% unless section.settings.ag_show_desktop %}hide-desktop{% endunless %} {% unless section.settings.ag_show_mobile %}hide-mobile{% endunless %}">
   <div class="page-width">
-    {%- if section.settings.title != blank -%}
+    {%- if section.settings.ag_title != blank -%}
       <div class="ag-faq-header text-center">
-        <h2 class="ag-faq-title">{{ section.settings.title | escape }}</h2>
-        {%- if section.settings.description != blank -%}
-          <p class="ag-faq-description">{{ section.settings.description | escape }}</p>
+        <h2 class="ag-faq-title">{{ section.settings.ag_title | escape }}</h2>
+        {%- if section.settings.ag_description != blank -%}
+          <p class="ag-faq-description">{{ section.settings.ag_description | escape }}</p>
         {%- endif -%}
       </div>
     {%- endif -%}
@@ -57,7 +71,7 @@
   }
 
   .ag-faq-title {
-    font-size: clamp(24px, 4vw, 36px);
+    font-size: var(--ag-title-size);
     font-weight: 900;
     text-transform: uppercase;
     font-style: italic;
@@ -151,6 +165,9 @@
     .ag-faq-trigger {
       padding: 18px 20px;
     }
+    .ag-faq-title {
+      font-size: var(--ag-title-size-mobile);
+    }
   }
 </style>
 
@@ -159,16 +176,60 @@
   "name": "AG Premium FAQ",
   "settings": [
     {
+      "type": "header",
+      "content": "Content Settings"
+    },
+    {
       "type": "text",
-      "id": "title",
+      "id": "ag_title",
       "label": "Heading",
       "default": "Frequently Asked Questions"
     },
     {
       "type": "text",
-      "id": "description",
+      "id": "ag_description",
       "label": "Sub-title",
       "default": "Everything You Need to Know"
+    },
+    {
+      "type": "header",
+      "content": "Control Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "ag_show_desktop",
+      "label": "Show on Desktop",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "ag_show_mobile",
+      "label": "Show on Mobile",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "ag_font_h2",
+      "min": 20,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "label": "Heading Size (Desktop)",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "ag_font_h2_mobile",
+      "min": 16,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "label": "Heading Size (Mobile)",
+      "default": 28
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
     },
     {
       "type": "range",

@@ -1,0 +1,250 @@
+{% comment %}
+  @author Antigravity
+  @description Triple-Action Therapy Accordion
+  @isolated Knee Massager Product Page
+{% endcomment %}
+
+{%- style -%}
+  .section-{{ section.id }} {
+    --ag-title-size: {{ section.settings.ag_font_h2 }}px;
+    --ag-title-size-mobile: {{ section.settings.ag_font_h2_mobile }}px;
+  }
+  @media screen and (max-width: 989px) {
+    .section-{{ section.id }} .ag-accordion__title {
+      font-size: var(--ag-title-size-mobile) !important;
+    }
+  }
+  .section-{{ section.id }} .ag-accordion__title {
+    font-size: var(--ag-title-size) !important;
+  }
+
+  {% if section.settings.ag_show_desktop == false %}
+    @media screen and (min-width: 750px) {
+      .section-{{ section.id }}.hide-desktop { display: none !important; }
+    }
+  {% endif %}
+
+  {% if section.settings.ag_show_mobile == false %}
+    @media screen and (max-width: 749px) {
+      .section-{{ section.id }}.hide-mobile { display: none !important; }
+    }
+  {% endif %}
+{%- endstyle -%}
+
+<section class="ag-accordion section-{{ section.id }} {% unless section.settings.ag_show_desktop %}hide-desktop{% endunless %} {% unless section.settings.ag_show_mobile %}hide-mobile{% endunless %}">
+  <div class="ag-accordion__container">
+    
+    <!-- Header -->
+    <div class="ag-accordion__header">
+      {% if section.settings.ag_heading != blank %}
+        <h2 class="ag-accordion__title">
+          {{ section.settings.ag_heading }}
+        </h2>
+      {% endif %}
+      {% if section.settings.ag_subheading != blank %}
+        <p class="ag-accordion__subtitle">{{ section.settings.ag_subheading }}</p>
+      {% endif %}
+    </div>
+
+    <!-- Accordion Card Grid (Styles coming from ag-custom.css) -->
+    <div class="ag-accordion__grid">
+      {%- for block in section.blocks -%}
+        <div class="ag-accordion__card feat-{{ block.settings.color_class | default: 'vibration' }}" {{ block.shopify_attributes }}>
+          <button class="ag-accordion__trigger" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}" onclick="agToggleAccordion(this)">
+            <div class="ag-accordion__trigger-left">
+              <div class="ag-accordion__icon-box theme-icon-box">
+                {% if block.settings.icon_svg != blank %}
+                  {{ block.settings.icon_svg }}
+                {% else %}
+                  {% case block.settings.color_class %}
+                    {% when 'vibration' %}
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="M4.93 4.93l1.41 1.41"></path><path d="M17.66 17.66l1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="M4.93 19.07l1.41-1.41"></path><path d="M17.66 6.34l1.41-1.41"></path></svg>
+                    {% when 'heat' %}
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg>
+                    {% when 'redlight' %}
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A5 5 0 0 0 8 8c0 1.3.5 2.6 1.5 3.5.8.8 1.3 1.5 1.5 2.5"></path><path d="M9 18h6"></path><path d="M10 22h4"></path></svg>
+                    {% else %}
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+                  {% endcase %}
+                {% endif %}
+              </div>
+              <h3 class="ag-accordion__item-title">{{ block.settings.title | escape }}</h3>
+            </div>
+            <span class="ag-accordion__chevron chevron">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </span>
+          </button>
+          <div class="ag-accordion__content">
+            <div class="ag-accordion__content-inner">
+              {% if block.settings.result_text != blank %}
+                <div class="ag-accordion__point">
+                  <span class="ag-accordion__point-label t-outcome">{{ block.settings.result_label | default: 'RESULT:' }}</span>
+                  <p>{{ block.settings.result_text }}</p>
+                </div>
+              {% endif %}
+              {% if block.settings.process_text != blank %}
+                <div class="ag-accordion__point">
+                  <span class="ag-accordion__point-label t-mechanism">{{ block.settings.process_label | default: 'PROCESS:' }}</span>
+                  <p>{{ block.settings.process_text }}</p>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<script>
+  function agToggleAccordion(trigger) {
+    const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+    const grid = trigger.closest('.ag-accordion__grid');
+    
+    // Only close others on desktop if needed, but the original layout allowed multiple open? 
+    // Usually these are 3 in a row on desktop and behave independently or as accordions.
+    // Based on the 'ag-accordion' name, let's keep it as single-open per group.
+    
+    const allTriggers = grid.querySelectorAll('.ag-accordion__trigger');
+    allTriggers.forEach(t => {
+      if (t !== trigger) {
+        t.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    trigger.setAttribute('aria-expanded', !isExpanded);
+  }
+</script>
+
+{% schema %}
+{
+  "name": "AG - Accordion Therapy",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content Settings"
+    },
+    {
+      "type": "text",
+      "id": "ag_heading",
+      "label": "Heading",
+      "default": "Triple-Action <span class=\"highlight\">Therapy</span>"
+    },
+    {
+      "type": "text",
+      "id": "ag_subheading",
+      "label": "Subheading",
+      "default": "Click To See How it Relives Your Knees."
+    },
+    {
+      "type": "header",
+      "content": "Control Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "ag_show_desktop",
+      "label": "Show on Desktop",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "ag_show_mobile",
+      "label": "Show on Mobile",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "ag_font_h2",
+      "min": 20,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "label": "Heading Size (Desktop)",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "ag_font_h2_mobile",
+      "min": 16,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "label": "Heading Size (Mobile)",
+      "default": 28
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "DEEP VIBRATION MASSAGE"
+        },
+        {
+          "type": "select",
+          "id": "color_class",
+          "label": "Color Style / Icon Fallback",
+          "options": [
+            { "value": "vibration", "label": "Vibration (Green)" },
+            { "value": "heat", "label": "Heat (Yellow)" },
+            { "value": "redlight", "label": "Red Light (Red)" }
+          ],
+          "default": "vibration"
+        },
+        {
+          "type": "html",
+          "id": "icon_svg",
+          "label": "Custom Icon (SVG Code Override)"
+        },
+        {
+          "type": "text",
+          "id": "result_label",
+          "label": "Result Label",
+          "default": "RESULT:"
+        },
+        {
+          "type": "textarea",
+          "id": "result_text",
+          "label": "Result Text"
+        },
+        {
+          "type": "text",
+          "id": "process_label",
+          "label": "Process Label",
+          "default": "PROCESS:"
+        },
+        {
+          "type": "textarea",
+          "id": "process_text",
+          "label": "Process Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "AG - Accordion Therapy",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": { "title": "DEEP VIBRATION MASSAGE", "color_class": "vibration" }
+        },
+        {
+          "type": "feature",
+          "settings": { "title": "SOOTHING HEAT THERAPY", "color_class": "heat" }
+        },
+        {
+          "type": "feature",
+          "settings": { "title": "RED LIGHT RECOVERY", "color_class": "redlight" }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

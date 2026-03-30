@@ -1,0 +1,327 @@
+{% comment %}
+  @author Antigravity
+  @description Custom Product Description section with compact merged bundle selection.
+  @isolated Knee Massager landing page.
+{% endcomment %}
+
+{{ 'ag-custom.css' | asset_url | stylesheet_tag }}
+
+<section class="ag-product-desc section-{{ section.id }}" id="product-overview">
+  <div class="ag-product-desc__container">
+    {% if section.settings.title != blank %}
+      <h2 class="ag-product-desc__title animate-on-scroll">{{ section.settings.title }}</h2>
+    {% endif %}
+
+    {% if section.settings.description != blank %}
+      <div class="ag-product-desc__content animate-on-scroll">
+        {{ section.settings.description }}
+      </div>
+    {% endif %}
+
+    <div class="ag-product-desc__main-cta animate-on-scroll">
+      <a href="{{ section.settings.main_cta_link | default: '#checkout-section' }}" class="ag-cta-button button button--primary pulse-animation" style="width: 100%; text-align: center; justify-content: center;">
+        {{ section.settings.main_cta_text | default: 'GET IT NOW' }}
+      </a>
+      {% if section.settings.cta_subtext != blank %}
+        <p class="ag-cta-trust" style="margin-top: 10px; justify-content: center;">{{ section.settings.cta_subtext }}</p>
+      {% endif %}
+    </div>
+
+    <!-- Merged Bundle Selection Area -->
+    <div class="ag-product-desc__bundles animate-on-scroll">
+      <div class="ag-product-desc__bundle-header">
+        <span>{{ section.settings.bundle_header | default: 'Or Choose a Complete Recovery Bundle' }}</span>
+      </div>
+
+      <div class="ag-compact-bundles">
+        {% for block in section.blocks %}
+          {%- liquid
+            assign bundle_items = ""
+            
+            if block.settings.main_product != blank
+              assign item = '{"id":' | append: block.settings.main_product.selected_or_first_available_variant.id | append: ',"quantity":' | append: block.settings.main_qty | append: '}'
+              assign bundle_items = bundle_items | append: item
+            endif
+
+            if block.settings.upsell_1 != blank
+              if bundle_items != ""
+                assign bundle_items = bundle_items | append: ","
+              endif
+              assign item = '{"id":' | append: block.settings.upsell_1.selected_or_first_available_variant.id | append: ',"quantity":' | append: block.settings.upsell_1_qty | append: '}'
+              assign bundle_items = bundle_items | append: item
+            endif
+
+            if block.settings.upsell_2 != blank
+              if bundle_items != ""
+                assign bundle_items = bundle_items | append: ","
+              endif
+              assign item = '{"id":' | append: block.settings.upsell_2.selected_or_first_available_variant.id | append: ',"quantity":' | append: block.settings.upsell_2_qty | append: '}'
+              assign bundle_items = bundle_items | append: item
+            endif
+            
+            assign bundle_json = "[" | append: bundle_items | append: "]"
+          -%}
+
+          <div class="ag-compact-bundle-item" data-bundle-items='{{ bundle_json }}' onclick="agSelectBundle(this)" {{ block.shopify_attributes }}>
+            {% if block.settings.is_popular %}
+              <div class="ag-compact-bundle-item__badge">MOST POPULAR</div>
+            {% endif %}
+            
+            <div class="ag-compact-bundle-item__left">
+              <div class="ag-compact-bundle-item__image-wrap">
+                {% if block.settings.image != blank %}
+                  <img src="{{ block.settings.image | image_url: width: 100 }}" alt="{{ block.settings.title }}" class="ag-compact-bundle-item__image" loading="lazy">
+                {% else %}
+                  <div class="ag-compact-bundle-item__image" style="display:flex; align-items:center; justify-content:center;">{{ 'product-1' | placeholder_svg_tag }}</div>
+                {% endif %}
+              </div>
+              <div class="ag-compact-bundle-item__info">
+                <span class="ag-compact-bundle-item__title">{{ block.settings.title }}</span>
+                <span class="ag-compact-bundle-item__subtitle">{{ block.settings.subtitle }}</span>
+              </div>
+            </div>
+
+            <div class="ag-compact-bundle-item__right">
+              <span class="ag-compact-bundle-item__price">{{ block.settings.price }}</span>
+              {% if block.settings.compare_at_price != blank %}
+                <span class="ag-compact-bundle-item__compare">{{ block.settings.compare_at_price }}</span>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="ag-bundle-expand-cta">
+            <button 
+              class="ag-bundle-card__button ag-multicart-btn" 
+              data-bundle-items='{{ bundle_json }}'
+              style="padding: 1rem; border-radius: 8px;"
+              type="button"
+            >
+              ADD {{ block.settings.title | upcase }} TO CART
+            </button>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function agSelectBundle(element) {
+    // Remove selected class from others
+    document.querySelectorAll('.ag-compact-bundle-item').forEach(item => {
+      item.classList.remove('ag-compact-bundle-item--selected');
+    });
+    // Add selected class to this one
+    element.classList.add('ag-compact-bundle-item--selected');
+  }
+
+  (function() {
+    function initBundleButtons() {
+      const bundleButtons = document.querySelectorAll('.ag-multicart-btn:not(.ag-initialized)');
+      
+      bundleButtons.forEach(button => {
+        button.classList.add('ag-initialized');
+        button.addEventListener('click', function(e) {
+          e.preventDefault();
+          const items = JSON.parse(this.getAttribute('data-bundle-items'));
+          if (!items || items.length === 0) return;
+
+          this.classList.add('ag-bundle-card__button--loading');
+          
+          fetch(window.Shopify.routes.root + 'cart/add.js', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ items: items })
+          })
+          .then(response => response.json())
+          .then(data => {
+            {% if section.settings.redirect_to_checkout %}
+              window.location.href = '/checkout';
+            {% else %}
+              window.location.href = '/cart';
+            {% endif %}
+          })
+          .catch(error => {
+            console.error('Error adding bundle to cart:', error);
+            this.classList.remove('ag-bundle-card__button--loading');
+            alert('Something went wrong. Please try again.');
+          });
+        });
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', initBundleButtons);
+    if (document.readyState !== 'loading') initBundleButtons();
+    if (window.Shopify && window.Shopify.designMode) {
+      document.addEventListener('shopify:section:load', initBundleButtons);
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "AG - Merged Product Desc",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Description Content"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "THE ULTIMATE KNEE RECOVERY"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Custom Description",
+      "default": "<p>Experience deep therapeutic relief with the Ultra Knee Massager. Engineered to restore mobility and eliminate pain in just 10 minutes a day.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Main CTA Settings"
+    },
+    {
+      "type": "text",
+      "id": "main_cta_text",
+      "label": "Main Button Text",
+      "default": "GET THE MASSAGER NOW"
+    },
+    {
+      "type": "url",
+      "id": "main_cta_link",
+      "label": "Main Button Link"
+    },
+    {
+      "type": "text",
+      "id": "cta_subtext",
+      "label": "CTA Subtext",
+      "default": "✓ 30-Day Money Back Guarantee"
+    },
+    {
+      "type": "header",
+      "content": "Bundle Selection Settings"
+    },
+    {
+      "type": "text",
+      "id": "bundle_header",
+      "label": "Bundle Area Header",
+      "default": "Or Upgrade to a Full Kit & Save"
+    },
+    {
+      "type": "checkbox",
+      "id": "redirect_to_checkout",
+      "label": "Direct to Checkout",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "bundle_option",
+      "name": "Bundle Option",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "is_popular",
+          "label": "Mark as Most Popular",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Bundle Title",
+          "default": "Single Device"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Bundle Subtitle",
+          "default": "Standard Relief"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Bundle Image"
+        },
+        {
+          "type": "product",
+          "id": "main_product",
+          "label": "Main Product (Massager)"
+        },
+        {
+          "type": "number",
+          "id": "main_qty",
+          "label": "Main Product Quantity",
+          "default": 1
+        },
+        {
+          "type": "product",
+          "id": "upsell_1",
+          "label": "Upsell 1 (Cream/Gel)"
+        },
+        {
+          "type": "number",
+          "id": "upsell_1_qty",
+          "label": "Upsell 1 Quantity",
+          "default": 1
+        },
+        {
+          "type": "product",
+          "id": "upsell_2",
+          "label": "Upsell 2 (Brace)"
+        },
+        {
+          "type": "number",
+          "id": "upsell_2_qty",
+          "label": "Upsell 2 Quantity",
+          "default": 1
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Display Price",
+          "default": "$129.99"
+        },
+        {
+          "type": "text",
+          "id": "compare_at_price",
+          "label": "Compare At Price",
+          "default": "$229.99"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "AG - Merged Product Desc",
+      "blocks": [
+        {
+          "type": "bundle_option",
+          "settings": {
+            "title": "Basic Relief",
+            "subtitle": "Knee Massager Only",
+            "price": "$99.99",
+            "compare_at_price": "$149.99",
+            "main_qty": 1
+          }
+        },
+        {
+          "type": "bundle_option",
+          "settings": {
+            "title": "Full Recovery Kit",
+            "subtitle": "Massager + Gel + Brace",
+            "price": "$129.99",
+            "compare_at_price": "$229.99",
+            "main_qty": 1,
+            "upsell_1_qty": 1,
+            "upsell_2_qty": 1,
+            "is_popular": true
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

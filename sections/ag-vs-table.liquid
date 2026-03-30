@@ -1,0 +1,272 @@
+{% comment %}
+  @author Antigravity
+  @description Comparison VS Table redesigned to match premium published layout.
+{% endcomment %}
+
+<section class="ag-vs-section" id="comparison-table">
+  <div class="ag-vs-panel">
+    
+    {% if section.settings.ag_heading != blank %}
+      <h2 class="ag-vs-title animate-on-scroll">{{ section.settings.ag_heading }}</h2>
+    {% endif %}
+
+    <div class="ag-vs-table">
+      
+      <!-- Headers Row -->
+      <div class="ag-vs-row ag-vs-row--header">
+        <div class="ag-vs-cell">{{ section.settings.ag_label_features | default: 'FEATURES' }}</div>
+        <div class="ag-vs-cell ag-vs-label--ours">{{ section.settings.ag_label_ours | default: 'ULTRA KNEE MASSAGER' }}</div>
+        <div class="ag-vs-cell">{{ section.settings.ag_label_alt1 | default: 'PILLS' }}</div>
+        <div class="ag-vs-cell">{{ section.settings.ag_label_alt2 | default: 'SURGERY' }}</div>
+      </div>
+
+      {%- for block in section.blocks -%}
+        <div class="ag-vs-row animate-on-scroll" {{ block.shopify_attributes }}>
+          <div class="ag-vs-cell ag-vs-cell--feature">{{ block.settings.feature_name }}</div>
+          
+          {%- comment -%} Column 1: Ours {%- endcomment -%}
+          <div class="ag-vs-cell ag-vs-cell--ours">
+            {% if block.settings.row_type == 'icon' %}
+              <span class="ag-vs-icon {% if block.settings.our_status == 'check' %}ag-vs-icon--green{% else %}ag-vs-icon--red{% endif %}">
+                {% if block.settings.our_status == 'check' %}✔{% else %}✖{% endif %}
+              </span>
+            {% else %}
+              {{ block.settings.our_value }}
+            {% endif %}
+          </div>
+
+          {%- comment -%} Column 2: Alt 1 {%- endcomment -%}
+          <div class="ag-vs-cell ag-vs-cell--competitor {% if block.settings.alt1_is_bad %}ag-vs-cell--bad{% endif %}">
+            {% if block.settings.row_type == 'icon' %}
+              <span class="ag-vs-icon {% if block.settings.alt1_status == 'check' %}ag-vs-icon--green{% else %}ag-vs-icon--red{% endif %}">
+                {% if block.settings.alt1_status == 'check' %}✔{% else %}✖{% endif %}
+              </span>
+            {% else %}
+              {{ block.settings.alt1_value }}
+            {% endif %}
+          </div>
+
+          {%- comment -%} Column 3: Alt 2 {%- endcomment -%}
+          <div class="ag-vs-cell ag-vs-cell--competitor {% if block.settings.alt2_is_bad %}ag-vs-cell--bad{% endif %}">
+            {% if block.settings.row_type == 'icon' %}
+              <span class="ag-vs-icon {% if block.settings.alt2_status == 'check' %}ag-vs-icon--green{% else %}ag-vs-icon--red{% endif %}">
+                {% if block.settings.alt2_status == 'check' %}✔{% else %}✖{% endif %}
+              </span>
+            {% else %}
+              {{ block.settings.alt2_value }}
+            {% endif %}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <!-- Footer & CTA -->
+    <div class="ag-vs-footer">
+      {% if section.settings.ag_footer_text != blank %}
+        <p class="ag-vs-footer-text animate-on-scroll">
+          {{ section.settings.ag_footer_text }}
+        </p>
+      {% endif %}
+      
+      {%- liquid
+        assign button_url = section.settings.ag_button_link
+        if button_url == blank
+          assign button_url = '#checkout-section'
+        endif
+      -%}
+      
+      <div class="ag-vs-cta-wrap animate-on-scroll">
+        <a href="{{ button_url }}" class="ag-vs-button">
+          {{ section.settings.ag_button_label }}
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "AG - Comparison Table",
+  "settings": [
+    {
+      "type": "text",
+      "id": "ag_heading",
+      "label": "Heading",
+      "default": "WHY IT WORKS & WHY IT'S BETTER"
+    },
+    {
+      "type": "text",
+      "id": "ag_label_features",
+      "label": "Header: Features",
+      "default": "FEATURES"
+    },
+    {
+      "type": "text",
+      "id": "ag_label_ours",
+      "label": "Header: Our Product",
+      "default": "ULTRA KNEE MASSAGER"
+    },
+    {
+      "type": "text",
+      "id": "ag_label_alt1",
+      "label": "Header: Alternative 1",
+      "default": "PILLS"
+    },
+    {
+      "type": "text",
+      "id": "ag_label_alt2",
+      "label": "Header: Alternative 2",
+      "default": "SURGERY"
+    },
+    {
+      "type": "textarea",
+      "id": "ag_footer_text",
+      "label": "Footer Text",
+      "default": "DON'T WAIT! Prevent serious injuries and surgeries before they begin."
+    },
+    {
+      "type": "text",
+      "id": "ag_button_label",
+      "label": "Button Label",
+      "default": "YES! I WANT PAIN-FREE KNEES"
+    },
+    {
+      "type": "url",
+      "id": "ag_button_link",
+      "label": "Button Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Comparison Row",
+      "settings": [
+        {
+          "type": "select",
+          "id": "row_type",
+          "label": "Display Type",
+          "options": [
+            { "value": "text", "label": "Text Based" },
+            { "value": "icon", "label": "Icon Based" }
+          ],
+          "default": "text"
+        },
+        {
+          "type": "text",
+          "id": "feature_name",
+          "label": "Feature Name"
+        },
+        {
+          "type": "header",
+          "content": "Our Product Column"
+        },
+        {
+          "type": "text",
+          "id": "our_value",
+          "label": "Text Value"
+        },
+        {
+          "type": "select",
+          "id": "our_status",
+          "label": "Icon Status",
+          "options": [
+            { "value": "check", "label": "Checkmark" },
+            { "value": "cross", "label": "Cross" }
+          ],
+          "default": "check"
+        },
+        {
+          "type": "header",
+          "content": "Alt 1 Column"
+        },
+        {
+          "type": "text",
+          "id": "alt1_value",
+          "label": "Text Value"
+        },
+        {
+          "type": "checkbox",
+          "id": "alt1_is_bad",
+          "label": "Highlight Text as Bad (Red)",
+          "default": true
+        },
+        {
+          "type": "select",
+          "id": "alt1_status",
+          "label": "Icon Status",
+          "options": [
+            { "value": "check", "label": "Checkmark" },
+            { "value": "cross", "label": "Cross" }
+          ],
+          "default": "cross"
+        },
+        {
+          "type": "header",
+          "content": "Alt 2 Column"
+        },
+        {
+          "type": "text",
+          "id": "alt2_value",
+          "label": "Text Value"
+        },
+        {
+          "type": "checkbox",
+          "id": "alt2_is_bad",
+          "label": "Highlight Text as Bad (Red)",
+          "default": true
+        },
+        {
+          "type": "select",
+          "id": "alt2_status",
+          "label": "Icon Status",
+          "options": [
+            { "value": "check", "label": "Checkmark" },
+            { "value": "cross", "label": "Cross" }
+          ],
+          "default": "cross"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "AG - Comparison Table",
+      "blocks": [
+        {
+          "type": "row",
+          "settings": { "feature_name": "SIDE EFFECTS", "our_value": "None (Natural)", "alt1_value": "Liver Damage / Brain Fog", "alt1_is_bad": true, "alt2_value": "Infection / Long Recovery", "alt2_is_bad": true }
+        },
+        {
+          "type": "row",
+          "settings": { "feature_name": "COST", "our_value": "One-time Payment", "alt1_value": "Lifetime Monthly Cost", "alt1_is_bad": true, "alt2_value": "$15,000+ (After Insurance)", "alt2_is_bad": true }
+        },
+        {
+          "type": "row",
+          "settings": { "feature_name": "RESULT", "our_value": "Immediate Relief", "alt1_value": "Temporary Masking", "alt1_is_bad": true, "alt2_value": "Permanent Alteration", "alt2_is_bad": true }
+        },
+        {
+          "type": "row",
+          "settings": { "feature_name": "RED LIGHT THERAPY", "row_type": "icon", "our_status": "check", "alt1_status": "cross", "alt2_status": "cross" }
+        },
+        {
+          "type": "row",
+          "settings": { "feature_name": "HANDS-FREE", "row_type": "icon", "our_status": "check", "alt1_status": "cross", "alt2_status": "cross" }
+        },
+        {
+          "type": "row",
+          "settings": { "feature_name": "PORTABLE", "row_type": "icon", "our_status": "check", "alt1_status": "cross", "alt2_status": "cross" }
+        },
+        {
+          "type": "row",
+          "settings": { "feature_name": "ADVANCED", "our_value": "SIMPLE", "alt1_value": "✔", "alt1_is_bad": false, "alt2_value": "✔", "alt2_is_bad": false }
+        },
+        {
+          "type": "row",
+          "settings": { "feature_name": "AFFORDABLE", "row_type": "icon", "our_status": "check", "alt1_status": "cross", "alt2_status": "cross" }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

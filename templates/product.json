@@ -1,12 +1,3 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "layout": "theme.funnel",
   "sections": {
@@ -174,28 +165,245 @@
       }
     },
     "anti_gravity_how_to": {
-      "type": "anti-gravity-how-to-use",
-      "settings": {}
+      "type": "ag-how-to-use",
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "title": "Strap and adjust"
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "title": "Set Heat & Vibration"
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "title": "Wear for 10 minutes"
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3"
+      ],
+      "settings": {
+        "ag_heading": "How It works In <span class=\"highlight\">3 Steps</span>"
+      }
     },
     "anti_gravity_features": {
-      "type": "anti-gravity-features",
-      "settings": {}
+      "type": "ag-features",
+      "blocks": {
+        "vibration": {
+          "type": "feature",
+          "settings": {
+            "title": "DEEP VIBRATION MASSAGE",
+            "color_class": "vibration",
+            "result_text": "Loosens \"frozen\" joints and melts away morning stiffness.",
+            "process_text": "3 adjustable high-frequency vibration levels target the soft tissue around the kneecap to release tension."
+          }
+        },
+        "heat": {
+          "type": "feature",
+          "settings": {
+            "title": "SOOTHING HEAT THERAPY",
+            "color_class": "heat",
+            "result_text": "Immediate \"ahhh\" feeling that stops sharp pains in their tracks.",
+            "process_text": "3 precise heat settings increase blood flow to the joint, \"oiling\" the knee for smoother movement."
+          }
+        },
+        "redlight": {
+          "type": "feature",
+          "settings": {
+            "title": "RED LIGHT RECOVERY",
+            "color_class": "redlight",
+            "result_text": "Long-term healing that goes deeper than a simple surface massage.",
+            "process_text": "Dual-wavelength red light therapy penetrates the skin to support cellular repair and reduce internal swelling."
+          }
+        }
+      },
+      "block_order": [
+        "vibration",
+        "heat",
+        "redlight"
+      ],
+      "settings": {
+        "ag_heading": "Triple-Action <span class=\"highlight\">Therapy</span>",
+        "ag_subheading": "Click To See How it Relives Your Knees."
+      }
     },
     "ag_cta_new": {
       "type": "ag-cta",
       "settings": {
-        "heading": "Ready For Some Pain Relief?",
-        "subheading": "",
-        "button_label": "FREE MY KNEES",
-        "button_link": "#checkout-section",
-        "trust_text": "✓ 30-Day Money Back Guarantee"
+        "ag_heading": "Ready For Some Pain Relief?",
+        "ag_subheading": "",
+        "ag_button_label": "FREE MY KNEES",
+        "ag_button_link": "#checkout-section",
+        "ag_trust_text": "✓ 30-Day Money Back Guarantee"
       }
     },
     "anti_gravity_vs_table": {
-      "type": "anti-gravity-vs-table",
+      "type": "ag-vs-table",
+      "blocks": {
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "feature_name": "SIDE EFFECTS",
+            "our_value": "None (Natural)",
+            "alt1_value": "Liver Damage / Brain Fog",
+            "alt1_is_bad": true,
+            "alt2_value": "Infection / Long Recovery",
+            "alt2_is_bad": true
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "feature_name": "COST",
+            "our_value": "One-time Payment",
+            "alt1_value": "Lifetime Monthly Cost",
+            "alt1_is_bad": true,
+            "alt2_value": "$15,000+ (After Insurance)",
+            "alt2_is_bad": true
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "feature_name": "RESULT",
+            "our_value": "Immediate Relief",
+            "alt1_value": "Temporary Masking",
+            "alt1_is_bad": true,
+            "alt2_value": "Permanent Alteration",
+            "alt2_is_bad": true
+          }
+        },
+        "row_4": {
+          "type": "row",
+          "settings": {
+            "feature_name": "RED LIGHT THERAPY",
+            "row_type": "icon",
+            "our_status": "check",
+            "alt1_status": "cross",
+            "alt2_status": "cross"
+          }
+        },
+        "row_5": {
+          "type": "row",
+          "settings": {
+            "feature_name": "HANDS-FREE",
+            "row_type": "icon",
+            "our_status": "check",
+            "alt1_status": "cross",
+            "alt2_status": "cross"
+          }
+        },
+        "row_6": {
+          "type": "row",
+          "settings": {
+            "feature_name": "PORTABLE",
+            "row_type": "icon",
+            "our_status": "check",
+            "alt1_status": "cross",
+            "alt2_status": "cross"
+          }
+        },
+        "row_7": {
+          "type": "row",
+          "settings": {
+            "feature_name": "ADVANCED",
+            "our_value": "SIMPLE",
+            "alt1_value": "\u2714",
+            "alt1_is_bad": false,
+            "alt2_value": "\u2714",
+            "alt2_is_bad": false
+          }
+        },
+        "row_8": {
+          "type": "row",
+          "settings": {
+            "feature_name": "AFFORDABLE",
+            "row_type": "icon",
+            "our_status": "check",
+            "alt1_status": "cross",
+            "alt2_status": "cross"
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3",
+        "row_4",
+        "row_5",
+        "row_6",
+        "row_7",
+        "row_8"
+      ],
       "settings": {
-        "button_label": "YES! I WANT PAIN-FREE KNEES",
-        "button_link": "https://premiumheals.com/cart/47023651324153:1?channel=buy_button&checkout=true"
+        "ag_heading": "WHY IT WORKS & WHY IT'S BETTER",
+        "ag_button_label": "YES! I WANT PAIN-FREE KNEES",
+        "ag_button_link": "#checkout-section"
+      }
+    },
+    "ag_bundle_deals_new": {
+      "type": "ag-bundle-deals",
+      "blocks": {
+        "bundle_1": {
+          "type": "bundle_option",
+          "settings": {
+            "title": "Regular",
+            "subtitle": "Knee Massager",
+            "price": "$99.99",
+            "compare_at_price": "$149.99",
+            "item_text_1": "1x Ultra Knee Massager",
+            "main_qty": 1
+          }
+        },
+        "bundle_2": {
+          "type": "bundle_option",
+          "settings": {
+            "title": "Single Knee Bundle",
+            "subtitle": "Full Kit",
+            "price": "$129.99",
+            "compare_at_price": "$229.99",
+            "item_text_1": "1x Ultra Knee Massager",
+            "item_text_2": "1x Healing Gel",
+            "item_text_3": "1x Knee Brace",
+            "main_qty": 1,
+            "upsell_1_qty": 1,
+            "upsell_2_qty": 1,
+            "is_popular": true
+          }
+        },
+        "bundle_3": {
+          "type": "bundle_option",
+          "settings": {
+            "title": "Double Knee Action",
+            "subtitle": "Best Recovery",
+            "price": "$189.99",
+            "compare_at_price": "$329.99",
+            "item_text_1": "2x Ultra Knee Massager",
+            "item_text_2": "2x Healing Gel",
+            "item_text_3": "2x Knee Brace",
+            "main_qty": 2,
+            "upsell_1_qty": 2,
+            "upsell_2_qty": 2
+          }
+        }
+      },
+      "block_order": [
+        "bundle_1",
+        "bundle_2",
+        "bundle_3"
+      ],
+      "settings": {
+        "title": "CHOOSE YOUR BUNDLE",
+        "subtitle": "Select the best deal for your recovery journey"
       }
     },
     "vitals_c3ee5db1_tUQb6F": {
@@ -312,8 +520,8 @@
         "faq_8"
       ],
       "settings": {
-        "title": "Frequently Asked Questions",
-        "description": "Everything You Need to Know",
+        "ag_title": "Frequently Asked Questions",
+        "ag_description": "Everything You Need to Know",
         "padding_top": 36,
         "padding_bottom": 36
       }
@@ -337,6 +545,99 @@
         "padding_top": 8,
         "padding_bottom": 8
       }
+    },
+    "ag_optimized_offer_new": {
+      "type": "ag-optimized-offer",
+      "blocks": {
+        "bundle_1": {
+          "type": "bundle_option",
+          "settings": {
+            "title": "Single Option",
+            "subtitle": "Knee Massager Only",
+            "price": "$104.99",
+            "compare_at_price": "$134.99",
+            "item_tags": "1x Ultra Knee Massager"
+          }
+        },
+        "bundle_2": {
+          "type": "bundle_option",
+          "settings": {
+            "title": "Bundle Deal",
+            "subtitle": "Full Kit + Savings",
+            "price": "$129.99",
+            "compare_at_price": "$229.99",
+            "item_tags": "1x Massager, 1x Gel, 1x Brace",
+            "is_popular": true
+          }
+        },
+        "bundle_3": {
+          "type": "bundle_option",
+          "settings": {
+            "title": "Double Knee Action",
+            "subtitle": "Best Value Recovery",
+            "price": "$189.99",
+            "compare_at_price": "$329.99",
+            "item_tags": "2x Massager, 2x Gel, 2x Brace"
+          }
+        },
+        "benefit_1": {
+          "type": "benefit",
+          "settings": {
+            "label": "Red Light Therapy",
+            "text": "(660nm + 850nm) — Boosts healing."
+          }
+        },
+        "benefit_2": {
+          "type": "benefit",
+          "settings": {
+            "label": "Heat Therapy",
+            "text": "Loosens stiffness + boosts circulation."
+          }
+        },
+        "benefit_3": {
+          "type": "benefit",
+          "settings": {
+            "label": "Deep Vibration",
+            "text": "Breaks up tension inside the joint."
+          }
+        },
+        "feature_1": {
+          "type": "feature",
+          "settings": {
+            "text": "No wires: Cordless & rechargeable, use anywhere."
+          }
+        },
+        "feature_2": {
+          "type": "feature",
+          "settings": {
+            "text": "Soft, adjustable straps: zero slipping or pinching."
+          }
+        },
+        "feature_3": {
+          "type": "feature",
+          "settings": {
+            "text": "Lightweight & easy use: built for all-day comfort."
+          }
+        }
+      },
+      "block_order": [
+        "bundle_1",
+        "bundle_2",
+        "bundle_3",
+        "benefit_1",
+        "benefit_2",
+        "benefit_3",
+        "feature_1",
+        "feature_2",
+        "feature_3"
+      ],
+      "settings": {
+        "badge": "RESTORE YOUR MOBILITY",
+        "title": "ULTRA KNEE MASSAGER",
+        "sale_price": "$104.99 USD",
+        "regular_price": "$134.99 USD",
+        "hook_text": "Knee pain ruining your day? The ultra knee massager is your shortcut to moving freely again without the need for pills or surgery. Designed to help you move better, feel stronger, and relief your chronic, bone on bone, joint knee pains and aches."
+      }
     }
   },
   "order": [
@@ -344,11 +645,13 @@
     "rich_text_9wfgYX",
     "premium_icon_bar",
     "image_with_text_6684ri",
+    "ag_optimized_offer_new",
     "main",
     "anti_gravity_how_to",
     "anti_gravity_features",
     "ag_cta_new",
     "anti_gravity_vs_table",
+    "ag_bundle_deals_new",
     "vitals_c3ee5db1_tUQb6F",
     "ag_faq_new",
     "custom_liquid_KHJMAV",

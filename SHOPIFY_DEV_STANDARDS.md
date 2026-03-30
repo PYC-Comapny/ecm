@@ -33,8 +33,8 @@ To ensure Shopify apps and analytics continue to work, the following Liquid tags
 
 ## 4. Technical Workflow
 - **CSS**: All custom styles should be placed in `assets/ag-custom.css`. This file is linked once in `theme.liquid`.
-- **Sections**: New layout features should be built as independent **Sections** to allow the user to move them around in the Shopify Theme Editor.
-- **JS**: Custom logic should be modularized in `assets/ag-scripts.js` or within specific Section files.
+- **Sections**: New features must be built as independent **Sections** with robust Liquid schemas. This empowers the user to edit text, images, and layout settings directly in the Shopify Theme Editor without code changes.
+- **JS**: Custom logic should be modularized in `assets/ag-scripts.js` or scoped within Section files.
 
 ---
 

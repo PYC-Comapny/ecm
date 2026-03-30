@@ -1,0 +1,611 @@
+{% comment %}
+  @author Antigravity
+  @description Optimized Product Offer section with integrated bundle selection, sales copy, and media.
+  @isolated Knee Massager funnel page.
+{% endcomment %}
+
+{{ 'ag-custom.css' | asset_url | stylesheet_tag }}
+
+<section class="ag-offer section-{{ section.id }}" id="main-offer-section">
+  <div class="ag-offer__container">
+    
+    <!-- Left Column: Sales Copy & Interaction -->
+    <div class="ag-offer__content animate-on-scroll">
+      <h1 class="ag-offer__title heading-premium text-4xl md:text-5xl" style="font-family: inherit; text-transform: uppercase;">
+        {{ section.settings.title | default: 'ULTRA KNEE MASSAGER' }}
+      </h1>
+
+      <div class="ag-offer__price-row">
+        <span class="ag-offer__price-sale">{{ section.settings.sale_price | default: '$104.99 USD' }}</span>
+        <span class="ag-offer__price-regular">{{ section.settings.regular_price | default: '$134.99 USD' }}</span>
+        <span class="ag-offer__price-badge">SALE</span>
+      </div>
+
+      <div class="ag-offer__installments" style="margin-bottom: 20px;">
+        {%- assign product_form_installment_id = 'product-form-installment-' | append: section.id -%}
+        {%- form 'product', product, id: product_form_installment_id, class: 'installment caption-large' -%}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+          {{ form | payment_terms }}
+        {%- endform -%}
+      </div>
+
+      <!-- Quantity Selector (As seen in image) -->
+      <div class="ag-offer__quantity-wrapper" style="margin-bottom: 25px; display: flex; align-items: center; gap: 15px;">
+        <span style="font-size: 14px; font-weight: 700; color: #4b5563;">Quantity:</span>
+        <div class="ag-qty-selector" style="display: flex; align-items: center; border: 1px solid #d1d5db; border-radius: 6px; overflow: hidden; width: fit-content; background: #fff;">
+          <button type="button" onclick="this.parentNode.querySelector('input').stepDown()" style="padding: 8px 15px; background: none; border: none; cursor: pointer; border-right: 1px solid #d1d5db; font-size: 18px;">-</button>
+          <input type="number" value="1" min="1" style="width: 50px; text-align: center; border: none; padding: 8px 0; font-weight: 700; background: none;">
+          <button type="button" onclick="this.parentNode.querySelector('input').stepUp()" style="padding: 8px 15px; background: none; border: none; cursor: pointer; border-left: 1px solid #d1d5db; font-size: 18px;">+</button>
+        </div>
+      </div>
+
+      <!-- Bundle Selector -->
+      <div class="ag-offer__bundles">
+        <div class="ag-bundle-selector" id="ag-bundle-selector-{{ section.id }}">
+          {% for block in section.blocks %}
+            {% if block.type == 'bundle_option' %}
+              {%- liquid
+                assign bundle_items = ""
+                if block.settings.product_1 != blank
+                  assign item = '{"id":' | append: block.settings.product_1.selected_or_first_available_variant.id | append: ',"quantity":' | append: block.settings.qty_1 | append: '}'
+                  assign bundle_items = bundle_items | append: item
+                endif
+                if block.settings.product_2 != blank
+                  if bundle_items != ""
+                    assign bundle_items = bundle_items | append: ","
+                  endif
+                  assign item = '{"id":' | append: block.settings.product_2.selected_or_first_available_variant.id | append: ',"quantity":' | append: block.settings.qty_2 | append: '}'
+                  assign bundle_items = bundle_items | append: item
+                endif
+                if block.settings.product_3 != blank
+                  if bundle_items != ""
+                    assign bundle_items = bundle_items | append: ","
+                  endif
+                  assign item = '{"id":' | append: block.settings.product_3.selected_or_first_available_variant.id | append: ',"quantity":' | append: block.settings.qty_3 | append: '}'
+                  assign bundle_items = bundle_items | append: item
+                endif
+                assign bundle_json = "[" | append: bundle_items | append: "]"
+              -%}
+
+              <div class="ag-bundle-row {% if block.settings.is_popular %}ag-bundle-row--selected{% endif %} {% if block.settings.is_popular %}ag-popular-choice{% endif %}" 
+                   data-bundle-items='{{ bundle_json }}'
+                   data-bundle-price='{{ block.settings.price }}'
+                   onclick="agSelectOffer(this)"
+                   {{ block.shopify_attributes }}>
+                
+                {% if block.settings.is_popular %}
+                  <div class="ag-bundle-row__popular-badge">MOST POPULAR</div>
+                {% endif %}
+
+                <div class="ag-bundle-row__left">
+                  <div class="ag-bundle-row__radio"></div>
+                  <div class="ag-bundle-row__info">
+                    <span class="ag-bundle-row__name">{{ block.settings.title }}</span>
+                    <span class="ag-bundle-row__subtext">{{ block.settings.subtitle }}</span>
+                  </div>
+                </div>
+
+                <div class="ag-bundle-row__price-stack">
+                  <span class="ag-bundle-row__price">{{ block.settings.price }}</span>
+                  {% if block.settings.compare_at_price != blank %}
+                    <span class="ag-bundle-row__compare">{{ block.settings.compare_at_price }}</span>
+                  {% endif %}
+                </div>
+
+                <!-- Sub-items (visible when selected) -->
+                {% if block.settings.item_tags != blank %}
+                  <div class="ag-bundle-row__sub-items">
+                    {% assign tags = block.settings.item_tags | split: ',' %}
+                    {% for tag in tags %}
+                      <span class="ag-bundle-row__item-tag">{{ tag | strip }}</span>
+                    {% endfor %}
+                  </div>
+                {% endif %}
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Master CTA & Urgency -->
+      <div class="ag-offer__cta-wrap">
+        <div class="ag-offer__stock-bar">
+          <div class="ag-stock-meter">
+            <div class="ag-stock-meter__fill" style="width: 15%;"></div>
+          </div>
+          <span class="ag-stock-meter__text">Only 3 left in stock!!!!</span>
+        </div>
+
+        <button type="button" 
+                id="ag-master-cta-{{ section.id }}"
+                class="ag-offer__master-cta button button--primary pulse-animation ag-multicart-btn" 
+                style="justify-content: center; text-align: center; font-size: 18px; padding: 1.25rem;">
+          {{ section.settings.cta_text | default: 'YES! I WANT THIS OFFER' }}
+        </button>
+      </div>
+
+      <!-- Sales Copy (Hook) -->
+      <div class="ag-offer__hook">
+        <p class="ag-offer__hook-text">
+          {{ section.settings.hook_text | default: 'Knee pain ruining your day? The ultra knee massager is your shortcut to moving freely again without the need for pills or surgery. Designed to help you move better, feel stronger, and relief your chronic, bone on bone, joint knee pains and aches.' }}
+        </p>
+      </div>
+
+      <!-- Lists (Benefits & Features) -->
+      <div class="ag-offer__lists" style="margin-bottom: 40px;">
+        <ul class="ag-feature-list" style="margin-bottom: 20px;">
+          {% for block in section.blocks %}
+            {% if block.type == 'benefit' %}
+              <li class="ag-feature-list__item" style="display: flex; align-items: baseline; gap: 8px; margin-bottom: 10px;">
+                <span class="ag-feature-list__check" style="color: #10b981; font-size: 14px; display: inline-block; vertical-align: middle;">✅</span>
+                <span class="ag-feature-list__text" style="font-size: 14px; color: #374151; line-height: 1.4;">
+                  <strong style="color: #111827;">{{ block.settings.label }}:</strong> {{ block.settings.text }}
+                </span>
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+
+        <ul class="ag-feature-list">
+          {% for block in section.blocks %}
+            {% if block.type == 'feature' %}
+              <li class="ag-feature-list__item" style="display: flex; align-items: baseline; gap: 8px; margin-bottom: 10px;">
+                <span class="ag-feature-list__check" style="color: #10b981; font-size: 14px; display: inline-block; vertical-align: middle;">✅</span>
+                <span class="ag-feature-list__text" style="font-size: 14px; color: #374151; line-height: 1.4;">
+                  <strong style="color: #111827;">{{ block.settings.text | split: ':' | first }}:</strong> {{ block.settings.text | split: ':' | last }}
+                </span>
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+
+      <!-- Knee Joint Scan Integration -->
+      <div class="ag-offer__diagnostic" style="margin-top: 20px;">
+        {% render 'anti-gravity-diagnostic-snippet' %}
+      </div>
+    </div>
+
+    <!-- Right Column: Shopify-Style Gallery -->
+    <div class="ag-offer__media">
+      <!-- Main Image -->
+      <div class="ag-offer__main-image">
+        <img id="ag-main-gallery-{{ section.id }}" 
+             src="{{ product.featured_media | image_url: width: 1000 }}" 
+             alt="{{ product.featured_media.alt | escape }}">
+      </div>
+
+      <!-- Thumbnail Grid (4 columns) -->
+      <div class="ag-offer__thumbnails">
+        {% for media in product.media %}
+          <div class="ag-offer__thumb-item" 
+               onclick="agUpdateGallery('{{ media | image_url: width: 1000 }}', this)"
+               data-active-border="{% if forloop.first %}true{% else %}false{% endif %}">
+            <img src="{{ media | image_url: width: 200 }}" alt="{{ media.alt | escape }}">
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Media Gallery refinement */
+  .ag-offer__media {
+    position: sticky;
+    top: 40px;
+    height: fit-content;
+    align-self: flex-start;
+  }
+  .ag-offer__main-image {
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    margin-bottom: 15px;
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .ag-offer__main-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: white;
+  }
+  .ag-offer__thumbnails {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+  .ag-offer__thumb-item {
+    cursor: pointer;
+    border: 2px solid rgba(0,0,0,0.05);
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+    aspect-ratio: 1 / 1;
+    transition: border-color 0.2s ease;
+  }
+  .ag-offer__thumb-item[data-active-border="true"] {
+    border-color: #111827;
+  }
+  .ag-offer__thumb-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .ag-feature-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .ag-feature-list__item {
+    display: grid;
+    grid-template-columns: 24px 1fr;
+    gap: 12px;
+    margin-bottom: 15px;
+    align-items: start;
+  }
+  .ag-feature-list__check {
+    font-size: 18px;
+    line-height: 1;
+    display: flex;
+    justify-content: center;
+    padding-top: 2px;
+  }
+  .ag-feature-list__text {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #4b5563;
+  }
+  .ag-feature-list__label {
+    font-weight: 700;
+    color: #111827;
+  }
+</style>
+
+<script>
+  function agUpdateGallery(url, element) {
+    const mainImg = document.getElementById('ag-main-gallery-{{ section.id }}');
+    if (mainImg) mainImg.src = url;
+    
+    // Clear all borders
+    const items = element.closest('.ag-offer__thumbnails').querySelectorAll('.ag-offer__thumb-item');
+    items.forEach(item => {
+      item.setAttribute('data-active-border', 'false');
+      item.style.borderColor = 'rgba(0,0,0,0.05)';
+    });
+    
+    // Set active border
+    element.setAttribute('data-active-border', 'true');
+    element.style.borderColor = '#111827';
+  }
+
+  function agSelectOffer(element) {
+    const parent = element.closest('.ag-bundle-selector');
+    const rows = parent.querySelectorAll('.ag-bundle-row');
+    const masterBtn = document.getElementById('ag-master-cta-{{ section.id }}');
+    
+    rows.forEach(row => row.classList.remove('ag-bundle-row--selected'));
+    element.classList.add('ag-bundle-row--selected');
+    
+    const items = element.getAttribute('data-bundle-items');
+    if (masterBtn) masterBtn.setAttribute('data-bundle-items', items);
+  }
+
+  (function() {
+    function initMasterCta() {
+      const btn = document.getElementById('ag-master-cta-{{ section.id }}');
+      if (!btn || btn.classList.contains('ag-initialized')) return;
+      
+      const selectedRow = document.querySelector('.ag-bundle-row--selected');
+      if (selectedRow) {
+        btn.setAttribute('data-bundle-items', selectedRow.getAttribute('data-bundle-items'));
+      }
+
+      btn.classList.add('ag-initialized');
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const itemsJson = this.getAttribute('data-bundle-items');
+        if (!itemsJson) return;
+        
+        const items = JSON.parse(itemsJson);
+        const qtyInput = document.querySelector('.ag-qty-selector input');
+        const qty = parseInt(qtyInput ? qtyInput.value : 1);
+        
+        const finalItems = items.map(item => ({
+          id: item.id,
+          quantity: item.quantity * qty
+        }));
+
+        this.classList.add('ag-bundle-card__button--loading');
+        
+        fetch(window.Shopify.routes.root + 'cart/add.js', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ items: finalItems })
+        })
+        .then(response => response.json())
+        .then(data => {
+          {% if section.settings.redirect_to_checkout %}
+            window.location.href = '/checkout';
+          {% else %}
+            window.location.href = '/cart';
+          {% endif %}
+        })
+        .catch(error => {
+          console.error('Add to cart error:', error);
+          this.classList.remove('ag-bundle-card__button--loading');
+        });
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', initMasterCta);
+    if (document.readyState !== 'loading') initMasterCta();
+    if (window.Shopify && window.Shopify.designMode) {
+      document.addEventListener('shopify:section:load', initMasterCta);
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "AG - Optimized Offer",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Price & Headings"
+    },
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Small Badge",
+      "default": "RESTORE YOUR MOBILITY"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Product Title",
+      "default": "ULTRA KNEE MASSAGER"
+    },
+    {
+      "type": "text",
+      "id": "sale_price",
+      "label": "Sale Price",
+      "default": "$104.99 USD"
+    },
+    {
+      "type": "text",
+      "id": "regular_price",
+      "label": "Regular Price",
+      "default": "$134.99 USD"
+    },
+    {
+      "type": "text",
+      "id": "installment_text",
+      "label": "Installment Text",
+      "default": "Pay in 4 interest-free installments of $26.25 with "
+    },
+    {
+      "type": "header",
+      "content": "Sales Copy"
+    },
+    {
+      "type": "textarea",
+      "id": "hook_text",
+      "label": "Hook Paragraph",
+      "default": "Knee pain ruining your day? The ultra knee massager is your shortcut to moving freely again without the need for pills or surgery. Designed to help you move better, feel stronger, and relief your chronic, bone on bone, joint knee pains and aches."
+    },
+    {
+      "type": "header",
+      "content": "CTA Settings"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Button Text",
+      "default": "YES! I WANT THIS OFFER"
+    },
+    {
+      "type": "checkbox",
+      "id": "redirect_to_checkout",
+      "label": "Direct to Checkout",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Media"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Main Product Image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "bundle_option",
+      "name": "Bundle Option",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "is_popular",
+          "label": "Most Popular?",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Bundle Title",
+          "default": "Single Device"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "Standard Relief"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price",
+          "default": "$104.99"
+        },
+        {
+          "type": "text",
+          "id": "compare_at_price",
+          "label": "Compare Price"
+        },
+        {
+          "type": "text",
+          "id": "item_tags",
+          "label": "Items (comma separated)",
+          "default": "1x Device"
+        },
+        {
+          "type": "product",
+          "id": "product_1",
+          "label": "Product 1"
+        },
+        {
+          "type": "number",
+          "id": "qty_1",
+          "label": "Qty 1",
+          "default": 1
+        },
+        {
+          "type": "product",
+          "id": "product_2",
+          "label": "Product 2"
+        },
+        {
+          "type": "number",
+          "id": "qty_2",
+          "label": "Qty 2",
+          "default": 1
+        },
+        {
+          "type": "product",
+          "id": "product_3",
+          "label": "Product 3"
+        },
+        {
+          "type": "number",
+          "id": "qty_3",
+          "label": "Qty 3",
+          "default": 1
+        }
+      ]
+    },
+    {
+      "type": "benefit",
+      "name": "Pillar Benefit",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label (Bold)",
+          "default": "Red Light Therapy"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Description",
+          "default": "(660nm + 850nm) — Boosts healing."
+        }
+      ]
+    },
+    {
+      "type": "feature",
+      "name": "General Feature",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Feature Text",
+          "default": "No wires: Cordless & rechargeable, use anywhere."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "AG - Optimized Offer",
+      "blocks": [
+        {
+          "type": "bundle_option",
+          "settings": {
+            "title": "Single Option",
+            "subtitle": "Knee Massager Only",
+            "price": "$104.99",
+            "compare_at_price": "$134.99",
+            "item_tags": "1x Ultra Knee Massager"
+          }
+        },
+        {
+          "type": "bundle_option",
+          "settings": {
+            "title": "Bundle Deal",
+            "subtitle": "Full Kit + Savings",
+            "price": "$129.99",
+            "compare_at_price": "$229.99",
+            "item_tags": "1x Massager, 1x Gel, 1x Brace",
+            "is_popular": true
+          }
+        },
+        {
+          "type": "bundle_option",
+          "settings": {
+            "title": "Double Knee Action",
+            "subtitle": "Best Value Recovery",
+            "price": "$189.99",
+            "compare_at_price": "$329.99",
+            "item_tags": "2x Massager, 2x Gel, 2x Brace"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "label": "Red Light Therapy",
+            "text": "(660nm + 850nm) — Boosts healing."
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "label": "Heat Therapy",
+            "text": "Loosens stiffness + boosts circulation."
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "label": "Deep Vibration",
+            "text": "Breaks up tension inside the joint."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": { "text": "No wires: Cordless & rechargeable, use anywhere." }
+        },
+        {
+          "type": "feature",
+          "settings": { "text": "Soft, adjustable straps: zero slipping or pinching." }
+        },
+        {
+          "type": "feature",
+          "settings": { "text": "Lightweight & easy use: built for all-day comfort." }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

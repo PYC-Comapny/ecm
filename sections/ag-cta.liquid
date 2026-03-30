@@ -1,27 +1,40 @@
-<section class="ag-cta-section section-{{ section.id }}">
+<section class="ag-cta-section section-{{ section.id }} {% unless section.settings.ag_show_desktop %}hide-desktop{% endunless %} {% unless section.settings.ag_show_mobile %}hide-mobile{% endunless %}">
   <div class="ag-cta-container">
     <div class="ag-cta-content">
-      {% if section.settings.heading != blank %}
-        <h2 class="ag-cta-heading">{{ section.settings.heading }}</h2>
+      {% if section.settings.ag_heading != blank %}
+        <h2 class="ag-cta-heading">{{ section.settings.ag_heading }}</h2>
       {% endif %}
-      {% if section.settings.subheading != blank %}
-        <p class="ag-cta-subheading">{{ section.settings.subheading }}</p>
+      {% if section.settings.ag_subheading != blank %}
+        <p class="ag-cta-subheading">{{ section.settings.ag_subheading }}</p>
       {% endif %}
       
       <div class="ag-cta-actions">
-        <a href="{{ section.settings.button_link | default: '#checkout-section' }}" class="ag-cta-button button button--primary pulse-animation">
-          {{ section.settings.button_label }}
+        {%- liquid
+          assign button_url = section.settings.ag_button_link
+          if section.settings.ag_checkout_direct and button_url == blank
+            assign button_url = '/checkout'
+          elsif button_url == blank
+            assign button_url = '#checkout-section'
+          endif
+        -%}
+        <a href="{{ button_url }}" class="ag-cta-button button button--primary pulse-animation">
+          {{ section.settings.ag_button_label }}
         </a>
       </div>
       
-      {% if section.settings.trust_text != blank %}
-        <p class="ag-cta-trust">{{ section.settings.trust_text }}</p>
+      {% if section.settings.ag_trust_text != blank %}
+        <p class="ag-cta-trust">{{ section.settings.ag_trust_text }}</p>
       {% endif %}
     </div>
   </div>
 </section>
 
 <style>
+  .section-{{ section.id }} {
+    --ag-heading-size: {{ section.settings.ag_font_h2 }}px;
+    --ag-heading-size-mobile: {{ section.settings.ag_font_h2_mobile }}px;
+  }
+
   .ag-cta-section {
     padding: 60px 0;
     background-color: #ffffff;
@@ -36,7 +49,7 @@
   }
 
   .ag-cta-heading {
-    font-size: clamp(28px, 5vw, 42px);
+    font-size: var(--ag-heading-size);
     font-weight: 900;
     text-transform: uppercase;
     font-style: italic;
@@ -84,6 +97,18 @@
     gap: 8px;
   }
 
+  {% if section.settings.ag_show_desktop == false %}
+    @media screen and (min-width: 750px) {
+      .section-{{ section.id }}.hide-desktop { display: none !important; }
+    }
+  {% endif %}
+
+  {% if section.settings.ag_show_mobile == false %}
+    @media screen and (max-width: 749px) {
+      .section-{{ section.id }}.hide-mobile { display: none !important; }
+    }
+  {% endif %}
+
   @keyframes pulse-cta {
     0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(60, 179, 113, 0.7); }
     70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(60, 179, 113, 0); }
@@ -98,6 +123,9 @@
     .ag-cta-section {
       padding: 40px 0;
     }
+    .ag-cta-heading {
+      font-size: var(--ag-heading-size-mobile);
+    }
     .ag-cta-button {
       width: 100%;
       padding: 18px 20px;
@@ -111,34 +139,80 @@
   "name": "AG Premium CTA",
   "settings": [
     {
+      "type": "header",
+      "content": "Content Settings"
+    },
+    {
       "type": "text",
-      "id": "heading",
+      "id": "ag_heading",
       "label": "Heading",
       "default": "Ready to Live Pain Free?"
     },
     {
       "type": "textarea",
-      "id": "subheading",
+      "id": "ag_subheading",
       "label": "Subheading",
       "default": "Join 10,000+ happy customers who reclaimed their mobility today."
     },
     {
       "type": "text",
-      "id": "button_label",
+      "id": "ag_button_label",
       "label": "Button Label",
       "default": "YES! I WANT RELIEF NOW"
     },
     {
       "type": "url",
-      "id": "button_link",
-      "label": "Button Link",
-      "default": "/#checkout-section"
+      "id": "ag_button_link",
+      "label": "Button Link"
     },
     {
       "type": "text",
-      "id": "trust_text",
+      "id": "ag_trust_text",
       "label": "Trust Text",
       "default": "✓ 90-Day Money Back Guarantee"
+    },
+    {
+      "type": "header",
+      "content": "Control Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "ag_show_desktop",
+      "label": "Show on Desktop",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "ag_show_mobile",
+      "label": "Show on Mobile",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "ag_checkout_direct",
+      "label": "Enable Direct Checkout",
+      "default": false,
+      "info": "When checked, and button link is empty, the button will go straight to /checkout"
+    },
+    {
+      "type": "range",
+      "id": "ag_font_h2",
+      "min": 20,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "label": "Heading Size (Desktop)",
+      "default": 42
+    },
+    {
+      "type": "range",
+      "id": "ag_font_h2_mobile",
+      "min": 16,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "label": "Heading Size (Mobile)",
+      "default": 32
     }
   ],
   "presets": [

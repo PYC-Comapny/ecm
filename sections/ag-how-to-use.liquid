@@ -1,0 +1,165 @@
+{% comment %}
+  @author Antigravity
+  @description How It Works In 3 Steps
+  @isolated Knee Massager Product Page
+{% endcomment %}
+
+{%- style -%}
+  .section-{{ section.id }} {
+    --ag-title-size: {{ section.settings.ag_font_h2 }}px;
+    --ag-title-size-mobile: {{ section.settings.ag_font_h2_mobile }}px;
+  }
+  @media screen and (max-width: 749px) {
+    .section-{{ section.id }} .ag-how-to__title {
+      font-size: var(--ag-title-size-mobile) !important;
+    }
+  }
+  .section-{{ section.id }} .ag-how-to__title {
+    font-size: var(--ag-title-size) !important;
+  }
+
+  {% if section.settings.ag_show_desktop == false %}
+    @media screen and (min-width: 750px) {
+      .section-{{ section.id }}.hide-desktop { display: none !important; }
+    }
+  {% endif %}
+
+  {% if section.settings.ag_show_mobile == false %}
+    @media screen and (max-width: 749px) {
+      .section-{{ section.id }}.hide-mobile { display: none !important; }
+    }
+  {% endif %}
+{%- endstyle -%}
+
+<section class="ag-how-to section-{{ section.id }} {% unless section.settings.ag_show_desktop %}hide-desktop{% endunless %} {% unless section.settings.ag_show_mobile %}hide-mobile{% endunless %}" id="how-to-use">
+  <div class="ag-how-to__container">
+    
+    <!-- Header -->
+    <div class="ag-how-to__header">
+      {% if section.settings.ag_heading != blank %}
+        <h2 class="ag-how-to__title">
+          {{ section.settings.ag_heading }}
+        </h2>
+      {% endif %}
+    </div>
+
+    <!-- Process Grid (Styles coming from ag-custom.css) -->
+    <div class="ag-how-to__grid">
+      {%- for block in section.blocks -%}
+        <div class="ag-how-to__card" {{ block.shopify_attributes }}>
+          <div class="ag-how-to__number">0{{ forloop.index }}</div>
+          <div class="ag-how-to__icon-box">
+            {% if block.settings.icon_svg != blank %}
+              {{ block.settings.icon_svg }}
+            {% else %}
+               {% comment %} Hardcoded Fallbacks for Knee Massager Steps {% endcomment %}
+               {% case forloop.index %}
+                 {% when 1 %}
+                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2b2c2d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>
+                 {% when 2 %}
+                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2b2c2d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                 {% when 3 %}
+                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2b2c2d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                 {% else %}
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2b2c2d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+               {% endcase %}
+            {% endif %}
+          </div>
+          <h3 class="ag-how-to__step-title">{{ block.settings.title | escape }}</h3>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "AG - How To Use",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content Settings"
+    },
+    {
+      "type": "text",
+      "id": "ag_heading",
+      "label": "Heading",
+      "default": "How It works In <span class=\"highlight\">3 Steps</span>"
+    },
+    {
+      "type": "header",
+      "content": "Control Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "ag_show_desktop",
+      "label": "Show on Desktop",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "ag_show_mobile",
+      "label": "Show on Mobile",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "ag_font_h2",
+      "min": 20,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "label": "Heading Size (Desktop)",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "ag_font_h2_mobile",
+      "min": 16,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "label": "Heading Size (Mobile)",
+      "default": 28
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Step Title",
+          "default": "Strap and adjust"
+        },
+        {
+          "type": "html",
+          "id": "icon_svg",
+          "label": "Custom Icon (SVG Code Override)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "AG - How To Use",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": { "title": "Strap and adjust" }
+        },
+        {
+          "type": "step",
+          "settings": { "title": "Set Heat & Vibration" }
+        },
+        {
+          "type": "step",
+          "settings": { "title": "Wear for 10 minutes" }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

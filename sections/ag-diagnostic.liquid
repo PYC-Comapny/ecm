@@ -1,0 +1,81 @@
+{% comment %}
+  @author Antigravity
+  @description Anatomical Knee Joint Scan / Diagnostic Panel
+  @isolated Knee Massager Product Page
+{% endcomment %}
+
+<div class="ag-diagnostic">
+  <div class="ag-diagnostic__panel">
+    <!-- Header -->
+    <div class="ag-diagnostic__header">
+      <div class="header-left">
+        <h2 class="ag-diagnostic__title">KNEE JOINT SCAN</h2>
+        <span class="ag-diagnostic__subtitle">LIVE METRIC SCAN</span>
+        <div class="ag-diagnostic__window-controls">
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="ag-diagnostic__main-score">
+          <div class="ag-diagnostic__score-value">94.2%</div>
+          <div class="ag-diagnostic__score-indicator">
+            <span class="up-arrow">↑</span>
+            <span class="ag-diagnostic__green-dot"></span>
+            <span class="score-text">↑ 2.1% PREV_REP</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Graphic -->
+    <div class="ag-diagnostic__graphic-container">
+      <img src="{{ 'knee-joint-anatomy.png' | asset_url }}" alt="Anatomical Knee Joint Scan" class="ag-diagnostic__img">
+      
+      <!-- Crucial Overlay: Concentric Red Light Rings -->
+      <div class="ag-diagnostic__overlay">
+        <div class="ag-diagnostic__ring ag-diagnostic__ring-1"></div>
+        <div class="ag-diagnostic__ring ag-diagnostic__ring-2"></div>
+        <div class="ag-diagnostic__ring ag-diagnostic__ring-3"></div>
+        <div class="ag-diagnostic__ring ag-diagnostic__ring-4"></div>
+        <div class="ag-diagnostic__core"></div>
+      </div>
+    </div>
+
+    <!-- Metric Boxes -->
+    <div class="ag-diagnostic__metrics">
+      <div class="ag-diagnostic__metric-box ag-diagnostic__metric-box--red">
+        <h3 class="ag-diagnostic__metric-header">CELLULAR REGENERATION</h3>
+        <div class="ag-diagnostic__metric-score">200% Increase</div>
+        <p class="ag-diagnostic__metric-text">Red Light Therapy Promotes Faster Recovery and Stronger Knees.</p>
+        <div class="ag-diagnostic__green-dot" style="position: absolute; bottom: 10px; right: 10px;"></div>
+      </div>
+      
+      <div class="ag-diagnostic__metric-box ag-diagnostic__metric-box--green">
+        <h3 class="ag-diagnostic__metric-header">DEEP TISSUE HEALING</h3>
+        <div class="ag-diagnostic__metric-score">3-7 cm ↑ Penetration</div>
+        <p class="ag-diagnostic__metric-text">Infrared Light Targets Deep-Seated Pain and Inflammation.</p>
+      </div>
+
+      <div class="ag-diagnostic__metric-box ag-diagnostic__metric-box--yellow">
+        <h3 class="ag-diagnostic__metric-header">STIFFNESS REDUCTION</h3>
+        <div class="ag-diagnostic__metric-score">30-50% Reduction</div>
+        <p class="ag-diagnostic__metric-text">Heat Therapy Makes Movement Easier and Less Painful.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "AG - Diagnostic",
+  "settings": [],
+  "presets": [
+    {
+      "name": "AG - Diagnostic",
+      "category": "Custom Content"
+    }
+  ]
+}
+{% endschema %}

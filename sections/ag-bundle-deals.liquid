@@ -1,0 +1,337 @@
+{% comment %}
+  @author Antigravity
+  @description High-converting tiered bundle selection section with multi-item AJAX add-to-cart.
+  @isolated Only for Knee Massager funnel.
+{% endcomment %}
+
+{{ 'ag-custom.css' | asset_url | stylesheet_tag }}
+
+<section class="ag-bundles" id="bundle-selection">
+  <div class="ag-bundles__container">
+    {% if section.settings.title != blank %}
+      <div class="ag-bundles__header">
+        <h2 class="ag-bundles__title animate-on-scroll">{{ section.settings.title }}</h2>
+        {% if section.settings.subtitle != blank %}
+          <p class="ag-bundles__subtitle animate-on-scroll">{{ section.settings.subtitle }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="ag-bundles__grid">
+      {% for block in section.blocks %}
+        {%- liquid
+          assign is_popular = block.settings.is_popular
+          assign bundle_items = ""
+          
+          if block.settings.main_product != blank
+            assign item = '{"id":' | append: block.settings.main_product.selected_or_first_available_variant.id | append: ',"quantity":' | append: block.settings.main_qty | append: '}'
+            assign bundle_items = bundle_items | append: item
+          endif
+
+          if block.settings.upsell_1 != blank
+            if bundle_items != ""
+              assign bundle_items = bundle_items | append: ","
+            endif
+            assign item = '{"id":' | append: block.settings.upsell_1.selected_or_first_available_variant.id | append: ',"quantity":' | append: block.settings.upsell_1_qty | append: '}'
+            assign bundle_items = bundle_items | append: item
+          endif
+
+          if block.settings.upsell_2 != blank
+            if bundle_items != ""
+              assign bundle_items = bundle_items | append: ","
+            endif
+            assign item = '{"id":' | append: block.settings.upsell_2.selected_or_first_available_variant.id | append: ',"quantity":' | append: block.settings.upsell_2_qty | append: '}'
+            assign bundle_items = bundle_items | append: item
+          endif
+          
+          assign bundle_json = "[" | append: bundle_items | append: "]"
+        -%}
+
+        <div class="ag-bundle-card animate-on-scroll {% if is_popular %}ag-bundle-card--popular{% endif %}" {{ block.shopify_attributes }}>
+          <div class="ag-bundle-card__header">
+            <h3 class="ag-bundle-card__title">{{ block.settings.title }}</h3>
+            <span class="ag-bundle-card__subtitle">{{ block.settings.subtitle }}</span>
+          </div>
+
+          <div class="ag-bundle-card__image-wrap">
+            {% if block.settings.image != blank %}
+              <img src="{{ block.settings.image | image_url: width: 400 }}" alt="{{ block.settings.title }}" class="ag-bundle-card__image" loading="lazy">
+            {% else %}
+              <div class="ag-bundle-card__placeholder">{{ 'product-1' | placeholder_svg_tag }}</div>
+            {% endif %}
+          </div>
+
+          <ul class="ag-bundle-card__included">
+            {% if block.settings.item_text_1 != blank %}
+              <li class="ag-bundle-card__item">
+                <span class="ag-bundle-card__check">✓</span>
+                {{ block.settings.item_text_1 }}
+              </li>
+            {% endif %}
+            {% if block.settings.item_text_2 != blank %}
+              <li class="ag-bundle-card__item">
+                <span class="ag-bundle-card__check">✓</span>
+                {{ block.settings.item_text_2 }}
+              </li>
+            {% endif %}
+            {% if block.settings.item_text_3 != blank %}
+              <li class="ag-bundle-card__item">
+                <span class="ag-bundle-card__check">✓</span>
+                {{ block.settings.item_text_3 }}
+              </li>
+            {% endif %}
+          </ul>
+
+          <div class="ag-bundle-card__pricing">
+            <span class="ag-bundle-card__price-total">{{ block.settings.price }}</span>
+            {% if block.settings.compare_at_price != blank %}
+              <span class="ag-bundle-card__compare">{{ block.settings.compare_at_price }}</span>
+            {% endif %}
+            {% if block.settings.savings_text != blank %}
+              <span class="ag-bundle-card__savings">{{ block.settings.savings_text }}</span>
+            {% endif %}
+          </div>
+
+          <button 
+            class="ag-bundle-card__button ag-multicart-btn" 
+            data-bundle-items='{{ bundle_json }}'
+            type="button"
+          >
+            {{ block.settings.button_text | default: "ADD TO CART" }}
+          </button>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const bundleButtons = document.querySelectorAll('.ag-multicart-btn');
+    
+    bundleButtons.forEach(button => {
+      button.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const items = JSON.parse(this.getAttribute('data-bundle-items'));
+        if (!items || items.length === 0) return;
+
+        this.classList.add('ag-bundle-card__button--loading');
+        
+        fetch(window.Shopify.routes.root + 'cart/add.js', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ items: items })
+        })
+        .then(response => response.json())
+        .then(data => {
+          {% if section.settings.redirect_to_checkout %}
+            window.location.href = '/checkout';
+          {% else %}
+            // Fallback to cart drawer or page
+            window.location.href = '/cart';
+          {% endif %}
+        })
+        .catch(error => {
+          console.error('Error adding bundle to cart:', error);
+          this.classList.remove('ag-bundle-card__button--loading');
+          alert('Something went wrong. Please try again.');
+        });
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "AG - Bundle Deals",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "CHOOSE YOUR BUNDLE"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Section Subtitle",
+      "default": "Select the best deal for your recovery journey"
+    },
+    {
+      "type": "checkbox",
+      "id": "redirect_to_checkout",
+      "label": "Direct to Checkout",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "bundle_option",
+      "name": "Bundle Option",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "is_popular",
+          "label": "Mark as Most Popular",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Bundle Title",
+          "default": "Single Device"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Bundle Subtitle",
+          "default": "Standard Relief"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Bundle Image"
+        },
+        {
+          "type": "header",
+          "content": "Products in Bundle"
+        },
+        {
+          "type": "product",
+          "id": "main_product",
+          "label": "Main Product (Massager)"
+        },
+        {
+          "type": "number",
+          "id": "main_qty",
+          "label": "Main Product Quantity",
+          "default": 1
+        },
+        {
+          "type": "product",
+          "id": "upsell_1",
+          "label": "Upsell 1 (Cream/Gel)"
+        },
+        {
+          "type": "number",
+          "id": "upsell_1_qty",
+          "label": "Upsell 1 Quantity",
+          "default": 1
+        },
+        {
+          "type": "product",
+          "id": "upsell_2",
+          "label": "Upsell 2 (Brace)"
+        },
+        {
+          "type": "number",
+          "id": "upsell_2_qty",
+          "label": "Upsell 2 Quantity",
+          "default": 1
+        },
+        {
+          "type": "header",
+          "content": "Pricing & UI"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Display Price",
+          "default": "$129.99"
+        },
+        {
+          "type": "text",
+          "id": "compare_at_price",
+          "label": "Compare At Price",
+          "default": "$229.99"
+        },
+        {
+          "type": "text",
+          "id": "savings_text",
+          "label": "Savings Text",
+          "default": "YOU SAVE $100"
+        },
+        {
+          "type": "text",
+          "id": "item_text_1",
+          "label": "Included Item 1",
+          "default": "1x Ultra Knee Massager"
+        },
+        {
+          "type": "text",
+          "id": "item_text_2",
+          "label": "Included Item 2",
+          "default": "1x Healing Gel"
+        },
+        {
+          "type": "text",
+          "id": "item_text_3",
+          "label": "Included Item 3",
+          "default": "1x Knee Brace"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "ADD BUNDLE TO CART"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "AG - Bundle Deals",
+      "blocks": [
+        {
+          "type": "bundle_option",
+          "settings": {
+            "title": "Regular",
+            "subtitle": "Knee Massager",
+            "price": "$99.99",
+            "compare_at_price": "$149.99",
+            "item_text_1": "1x Ultra Knee Massager",
+            "item_text_2": "",
+            "item_text_3": "",
+            "main_qty": 1
+          }
+        },
+        {
+          "type": "bundle_option",
+          "settings": {
+            "title": "Single Knee Bundle",
+            "subtitle": "Full Kit",
+            "price": "$129.99",
+            "compare_at_price": "$229.99",
+            "item_text_1": "1x Ultra Knee Massager",
+            "item_text_2": "1x Healing Gel",
+            "item_text_3": "1x Knee Brace",
+            "main_qty": 1,
+            "upsell_1_qty": 1,
+            "upsell_2_qty": 1,
+            "is_popular": true
+          }
+        },
+        {
+          "type": "bundle_option",
+          "settings": {
+            "title": "Double Knee Action",
+            "subtitle": "Best Recovery",
+            "price": "$189.99",
+            "compare_at_price": "$329.99",
+            "item_text_1": "2x Ultra Knee Massager",
+            "item_text_2": "2x Healing Gel",
+            "item_text_3": "2x Knee Brace",
+            "main_qty": 2,
+            "upsell_1_qty": 2,
+            "upsell_2_qty": 2
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

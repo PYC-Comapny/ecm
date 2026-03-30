@@ -4,6 +4,13 @@ This document outlines the detailed plan to update the Knee Massager page into a
 
 ## Progress Checklist
 
+### Phase 0: The "Bulldoze" Prep (Schema & Control Mapping)
+- [ ] **Standardized IDs (SSD):** Define consistent setting IDs (e.g., `ag_hero_title`, `ag_cta_link`) for all new sections to ensure "Bulldoze" compatibility.
+- [ ] **Block-First Architecture:** Re-plan the 3-Step Process, Trust Badges, and FAQ as dynamic **Blocks** for reordering in the Theme Editor.
+- [ ] **Visibility Toggles:** Add `show_on_mobile` and `show_on_desktop` checkboxes to every section schema for responsive control.
+- [ ] **Checkout Bypass Toggle:** Add an `enable_direct_checkout` setting to the Hero and Main Offer sections.
+- [ ] **Typography Sliders:** Map `font_size_mobile` and `font_size_desktop` settings to all headlines to allow for manual sizing adjustments.
+
 ### Phase 1: Design System & Visual Theme Setup
 - [x] **Colors:** Configure backgrounds, premium accents (`#F4D03F`), Trust Green (`#3CB371`), Amber (`#F59E0B`), Red (`#EF4444` to `#CF3F5C`), and Brand Black (`#1F1F1F`).
 - [x] **Typography:** Set base font to 'Outfit'/'Inter'. Implement `.heading-premium` utility class.
