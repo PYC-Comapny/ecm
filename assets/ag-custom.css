@@ -405,16 +405,16 @@
 .ag-how-to__step-title { font-size: 16px; font-weight: 700; color: #2b2c2d; margin: 0; line-height: 1.2; }
 
 @media (max-width: 749px) { 
-  .ag-how-to { padding: 1.5rem 0; }
+  .ag-how-to-alt { padding: 1.5rem 0; }
   .ag-how-to__header { margin-bottom: 1rem; }
   .ag-how-to__grid { 
     grid-template-columns: repeat(3, 1fr); 
     gap: 0.25rem; 
   }
-  .ag-how-to__card {
+  .ag-how-to-alt .ag-how-to__card {
     padding: 1rem 0.25rem;
   }
-  .ag-how-to__number {
+  .ag-how-to-alt .ag-how-to__number {
     font-size: 18px;
     top: 0.25rem;
     right: 0.25rem;
@@ -428,20 +428,37 @@
     width: 14px;
     height: 14px;
   }
-  .ag-how-to__step-title {
+  .ag-how-to-alt .ag-how-to__step-title {
     font-size: 8px;
     line-height: 1.1;
   }
 } 
 
-/* Remove Vitals app injection if it targets this section */
-.ag-how-to .vitals-reviews,
-.ag-how-to .vitals-rating,
-.ag-how-to .vtls-rating,
-.ag-how-to .vtls-reviews,
-.ag-how-to [class*="vitals"],
-.ag-how-to [id*="vitals"] {
+/* Hard-remove any Vitals app injections (stars, reviews, badges) from this section */
+#agh-3step-process,
+.ag-how-to-alt {
+  overflow: visible;
+  position: relative;
+}
+
+#agh-3step-process .vitals-reviews,
+#agh-3step-process .vitals-rating,
+#agh-3step-process .vtls-rating,
+#agh-3step-process .vtls-reviews,
+#agh-3step-process .vitals-stars,
+#agh-3step-process [class*="vtl"],
+#agh-3step-process [class*="vitals"],
+#agh-3step-process [id*="vtl"],
+#agh-3step-process [id*="vitals"],
+#agh-3step-process iframe[title*="Vitals"],
+#agh-3step-process [data-vitals-reviews] {
   display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
 
  
