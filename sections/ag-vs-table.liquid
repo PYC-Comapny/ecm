@@ -71,12 +71,12 @@
       {%- liquid
         assign button_url = section.settings.ag_button_link
         if button_url == blank
-          assign button_url = '#checkout-section'
+          assign button_url = '#bundle-selection'
         endif
       -%}
       
       <div class="ag-vs-cta-wrap animate-on-scroll">
-        <a href="{{ button_url }}" class="ag-vs-button">
+        <a href="{{ button_url }}" class="ag-vs-button {% if button_url contains '#' %}ag-scroll-trigger{% endif %}">
           {{ section.settings.ag_button_label }}
         </a>
       </div>

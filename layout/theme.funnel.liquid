@@ -399,23 +399,32 @@
           }
         });
 
-        // Global CTA Direct-to-Checkout
+        // Global Scroll-to-Offer Behavior
         document.addEventListener('click', function(e) {
-          const link = e.target.closest('a');
-          if (link && link.getAttribute('href') === '#checkout-section') {
-            e.preventDefault();
-            const variantIdInput = document.querySelector('input[name="id"].product-variant-id');
-            const variantId = variantIdInput ? variantIdInput.value : null;
+          const trigger = e.target.closest('a, button');
+          if (!trigger) return;
 
-            if (variantId) {
-              // Redirect to direct checkout with 1 unit
-              window.location.href = `/cart/${variantId}:1`;
-            } else {
-              // Fallback: smooth scroll if no variant found
-              const targetElement = document.getElementById('checkout-section');
-              if (targetElement) {
-                targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-              }
+          const href = trigger.getAttribute('href');
+          const isScrollTrigger = trigger.classList.contains('ag-scroll-trigger') || 
+                                 (href && (href === '#bundle-selection' || href === '#checkout-section'));
+
+          if (isScrollTrigger) {
+            e.preventDefault();
+            const targetId = (href && href.startsWith('#')) ? href.substring(1) : 'bundle-selection';
+            let targetElement = document.getElementById(targetId);
+            
+            // Fallback: If #bundle-selection not found, scan for any of our common IDs
+            if (!targetElement) {
+              targetElement = document.getElementById('bundle-selection') || 
+                             document.getElementById('checkout-section') || 
+                             document.getElementById('main-offer-section');
+            }
+
+            if (targetElement) {
+              targetElement.scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'center' 
+              });
             }
           }
         });

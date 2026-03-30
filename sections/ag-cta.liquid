@@ -14,10 +14,10 @@
           if section.settings.ag_checkout_direct and button_url == blank
             assign button_url = '/checkout'
           elsif button_url == blank
-            assign button_url = '#checkout-section'
+            assign button_url = '#bundle-selection'
           endif
         -%}
-        <a href="{{ button_url }}" class="ag-cta-button button button--primary pulse-animation">
+        <a href="{{ button_url }}" class="ag-cta-button button button--primary pulse-animation {% if button_url contains '#' %}ag-scroll-trigger{% endif %}">
           {{ section.settings.ag_button_label }}
         </a>
       </div>
