@@ -16,7 +16,7 @@
         "heading_3FVrHb": {
           "type": "heading",
           "settings": {
-            "heading": "Move Freely By Relieving Chronic, Bone, Joint, Pains, and Aches By Using The 3 In 1 Ultra Knee Massager",
+            "heading": "Move Freely By Relieving Chronic, Bone, Joint, Pains, and Aches By Using The Ultra Knee Massager",
             "heading_size": "h2"
           }
         }
@@ -81,14 +81,14 @@
         "heading_j7r3fd": {
           "type": "heading",
           "settings": {
-            "heading": "<strong>\"10 minutes, saw results immediately\"</strong>",
+            "heading": "<strong>No need for pills or surguries.</strong>",
             "heading_size": "h2"
           }
         },
         "text_CNJj6W": {
           "type": "text",
           "settings": {
-            "text": "<p>\"had three friends with knee problems try mine and all three have noticed some relief after only 10 minutes ! They have all ordered one. relief is absolutely amazing.\" - Juan M.<strong><br/></strong></p>",
+            "text": "<p>\"I <strong>seriously</strong> thought that I was going to have to get surgery done on my right knee, but this massager <strong>saved me from being screwed</strong>. The <strong>relief</strong> is <strong>amazing</strong>.\" - Juan M.</p>",
             "text_style": "body"
           }
         },
@@ -121,6 +121,44 @@
         "color_scheme": "scheme-156b13b9-b85d-4aea-b2d5-bc69b8208eff",
         "padding_top": 0,
         "padding_bottom": 0
+      }
+    },
+    "anti_gravity_how_to": {
+      "type": "ag-how-to-use",
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "title": "Strap and adjust",
+            "icon_svg": ""
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "title": "Set Heat & Vibration",
+            "icon_svg": ""
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "title": "Wear for 10 minutes",
+            "icon_svg": ""
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3"
+      ],
+      "settings": {
+        "ag_heading": "How It works In 3 Steps",
+        "ag_show_desktop": true,
+        "ag_show_mobile": true,
+        "ag_font_h2": 36,
+        "ag_font_h2_mobile": 28
       }
     },
     "ag_optimized_offer_new": {
@@ -290,44 +328,6 @@
         "enable_video_looping": false,
         "padding_top": 24,
         "padding_bottom": 20
-      }
-    },
-    "anti_gravity_how_to": {
-      "type": "ag-how-to-use",
-      "blocks": {
-        "step_1": {
-          "type": "step",
-          "settings": {
-            "title": "Strap and adjust",
-            "icon_svg": ""
-          }
-        },
-        "step_2": {
-          "type": "step",
-          "settings": {
-            "title": "Set Heat & Vibration",
-            "icon_svg": ""
-          }
-        },
-        "step_3": {
-          "type": "step",
-          "settings": {
-            "title": "Wear for 10 minutes",
-            "icon_svg": ""
-          }
-        }
-      },
-      "block_order": [
-        "step_1",
-        "step_2",
-        "step_3"
-      ],
-      "settings": {
-        "ag_heading": "How It works In <span class=\"highlight\">3 Steps</span>",
-        "ag_show_desktop": true,
-        "ag_show_mobile": true,
-        "ag_font_h2": 36,
-        "ag_font_h2_mobile": 28
       }
     },
     "anti_gravity_features": {
@@ -616,6 +616,7 @@
         "bundle_2",
         "bundle_3"
       ],
+      "disabled": true,
       "settings": {
         "title": "CHOOSE YOUR BUNDLE",
         "subtitle": "Select the best deal for your recovery journey",
@@ -738,6 +739,7 @@
       "settings": {
         "ag_title": "Frequently Asked Questions",
         "ag_description": "Everything You Need to Know",
+        "ag_cta_text": "GET KNEE PAIN RELIEF",
         "ag_show_desktop": true,
         "ag_show_mobile": true,
         "ag_font_h2": 36,
@@ -772,9 +774,9 @@
     "rich_text_9wfgYX",
     "premium_icon_bar",
     "image_with_text_6684ri",
+    "anti_gravity_how_to",
     "ag_optimized_offer_new",
     "main",
-    "anti_gravity_how_to",
     "anti_gravity_features",
     "ag_cta_new",
     "anti_gravity_vs_table",
