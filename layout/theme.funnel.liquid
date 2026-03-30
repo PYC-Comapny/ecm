@@ -410,14 +410,14 @@
 
           if (isScrollTrigger) {
             e.preventDefault();
-            const targetId = (href && href.startsWith('#')) ? href.substring(1) : 'bundle-selection';
+            const targetId = (href && href.startsWith('#')) ? href.substring(1) : 'main-offer-section';
             let targetElement = document.getElementById(targetId);
             
-            // Fallback: If #bundle-selection not found, scan for any of our common IDs
-            if (!targetElement) {
-              targetElement = document.getElementById('bundle-selection') || 
-                             document.getElementById('checkout-section') || 
-                             document.getElementById('main-offer-section');
+            // Fallback: Prioritize #main-offer-section (Optimized Offer)
+            if (!targetElement || targetId === 'bundle-selection' || targetId === 'checkout-section') {
+              targetElement = document.getElementById('main-offer-section') || 
+                             document.getElementById('bundle-selection') || 
+                             document.getElementById('checkout-section');
             }
 
             if (targetElement) {

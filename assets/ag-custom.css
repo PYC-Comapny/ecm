@@ -903,9 +903,11 @@
 }
 
 .ag-bundle-row--selected {
-  border: 2px solid #CF3F5C;
-  background: rgba(207, 63, 92, 0.03);
-  box-shadow: 0 4px 15px rgba(207, 63, 92, 0.1);
+  border: 3px solid #CF3F5C;
+  background: rgba(207, 63, 92, 0.05);
+  box-shadow: 0 8px 25px rgba(207, 63, 92, 0.15);
+  transform: scale(1.02);
+  z-index: 5;
 }
 
 .ag-bundle-row__left {

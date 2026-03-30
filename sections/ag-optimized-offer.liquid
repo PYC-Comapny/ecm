@@ -65,7 +65,7 @@
                 assign bundle_json = "[" | append: bundle_items | append: "]"
               -%}
 
-              <div class="ag-bundle-row {% if block.settings.is_popular %}ag-bundle-row--selected{% endif %} {% if block.settings.is_popular %}ag-popular-choice{% endif %}" 
+              <div class="ag-bundle-row {% if forloop.first %}ag-bundle-row--selected{% endif %} {% if block.settings.is_popular %}ag-popular-choice{% endif %}" 
                    data-bundle-items='{{ bundle_json }}'
                    data-bundle-price='{{ block.settings.price }}'
                    onclick="agSelectOffer(this)"
@@ -90,7 +90,7 @@
                   {% endif %}
                 </div>
 
-                <!-- Sub-items (visible when selected) -->
+                <!-- Sub-items -->
                 {% if block.settings.item_tags != blank %}
                   <div class="ag-bundle-row__sub-items">
                     {% assign tags = block.settings.item_tags | split: ',' %}

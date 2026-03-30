@@ -55,6 +55,12 @@
           </div>
         </div>
       {%- endfor -%}
+
+      <div class="ag-faq-cta text-center" style="margin-top: 40px;">
+        <a href="#main-offer-section" class="button button--primary ag-scroll-trigger pulse-animation" style="padding: 1.5rem 3rem; font-size: 1.8rem; font-weight: 900; border-radius: 50px; text-transform: uppercase;">
+          {{ section.settings.ag_cta_text | default: 'YES! I WANT PAIN RELIEF NOW' }}
+        </a>
+      </div>
     </div>
   </div>
 </div>
@@ -190,6 +196,12 @@
       "id": "ag_description",
       "label": "Sub-title",
       "default": "Everything You Need to Know"
+    },
+    {
+      "type": "text",
+      "id": "ag_cta_text",
+      "label": "CTA Button Text",
+      "default": "YES! I WANT PAIN RELIEF NOW"
     },
     {
       "type": "header",
