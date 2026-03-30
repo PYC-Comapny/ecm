@@ -46,10 +46,16 @@
             {% if block.type == 'bundle_option' %}
               {%- liquid
                 assign bundle_items = ""
-                if block.settings.product_1 != blank
-                  assign item = '{"id":' | append: block.settings.product_1.selected_or_first_available_variant.id | append: ',"quantity":' | append: block.settings.qty_1 | append: '}'
+                
+                {% comment %} Fallback: if product_1 is not selected, assume the main Knee Massager (current product) {% endcomment %}
+                assign main_product_obj = block.settings.product_1 | default: product
+                
+                if main_product_obj != blank
+                  assign main_id = main_product_obj.selected_or_first_available_variant.id
+                  assign item = '{"id":' | append: main_id | append: ',"quantity":' | append: block.settings.qty_1 | append: '}'
                   assign bundle_items = bundle_items | append: item
                 endif
+                
                 if block.settings.product_2 != blank
                   if bundle_items != ""
                     assign bundle_items = bundle_items | append: ","
@@ -57,6 +63,7 @@
                   assign item = '{"id":' | append: block.settings.product_2.selected_or_first_available_variant.id | append: ',"quantity":' | append: block.settings.qty_2 | append: '}'
                   assign bundle_items = bundle_items | append: item
                 endif
+                
                 if block.settings.product_3 != blank
                   if bundle_items != ""
                     assign bundle_items = bundle_items | append: ","

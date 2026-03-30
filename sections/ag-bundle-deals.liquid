@@ -23,8 +23,10 @@
           assign is_popular = block.settings.is_popular
           assign bundle_items = ""
           
-          if block.settings.main_product != blank
-            assign item = '{"id":' | append: block.settings.main_product.selected_or_first_available_variant.id | append: ',"quantity":' | append: block.settings.main_qty | append: '}'
+          {% comment %} Fallback to current product if main_product selection is blank {% endcomment %}
+          assign main_product_obj = block.settings.main_product | default: product
+          if main_product_obj != blank
+            assign item = '{"id":' | append: main_product_obj.selected_or_first_available_variant.id | append: ',"quantity":' | append: block.settings.main_qty | append: '}'
             assign bundle_items = bundle_items | append: item
           endif
 
