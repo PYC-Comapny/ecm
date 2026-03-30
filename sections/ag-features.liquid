@@ -50,7 +50,7 @@
     <div class="ag-accordion__grid">
       {%- for block in section.blocks -%}
         <div class="ag-accordion__card feat-{{ block.settings.color_class | default: 'vibration' }}" {{ block.shopify_attributes }}>
-          <button class="ag-accordion__trigger" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}" onclick="agToggleAccordion(this)">
+          <button class="ag-accordion__trigger" aria-expanded="false" onclick="agToggleAccordion(this)">
             <div class="ag-accordion__trigger-left">
               <div class="ag-accordion__icon-box theme-icon-box">
                 {% if block.settings.icon_svg != blank %}

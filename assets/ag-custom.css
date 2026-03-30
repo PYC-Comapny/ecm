@@ -232,7 +232,12 @@
 .ag-accordion__point-label { font-weight: 800; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; }
 .ag-accordion__point p { font-size: 13px; line-height: 1.4; color: #4b5563; margin: 0; }
 
-@media (max-width: 989px) { .ag-accordion__grid { grid-template-columns: 1fr; gap: 1rem; } }
+@media (max-width: 989px) { 
+  .ag-accordion__grid { grid-template-columns: 1fr; gap: 1rem; } 
+  .ag-accordion { padding: 1.5rem 0; }
+  .ag-accordion__header { margin-bottom: 1.5rem; }
+} 
+
 
 /* 3. AG - Vs Table Styles (ag-vs-table.liquid) */
 /* 3. AG - Comparison VS Table (ag-vs-table.liquid) */
@@ -399,7 +404,36 @@
 .ag-how-to__icon-box { width: 44px; height: 44px; background: #ffffff; border: 1.5px solid #f0f0f0; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; }
 .ag-how-to__step-title { font-size: 16px; font-weight: 700; color: #2b2c2d; margin: 0; line-height: 1.2; }
 
-@media (max-width: 749px) { .ag-how-to__grid { grid-template-columns: 1fr; } }
+@media (max-width: 749px) { 
+  .ag-how-to { padding: 1.5rem 0; }
+  .ag-how-to__header { margin-bottom: 1rem; }
+  .ag-how-to__grid { 
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 0.25rem; 
+  }
+  .ag-how-to__card {
+    padding: 1rem 0.25rem;
+  }
+  .ag-how-to__number {
+    font-size: 18px;
+    top: 0.25rem;
+    right: 0.25rem;
+  }
+  .ag-how-to__icon-box {
+    width: 28px;
+    height: 28px;
+    margin-bottom: 0.5rem;
+  }
+  .ag-how-to__icon-box svg {
+    width: 14px;
+    height: 14px;
+  }
+  .ag-how-to__step-title {
+    font-size: 8px;
+    line-height: 1.1;
+  }
+} 
+
  
 /* 5. AG - Bundle Deals (ag-bundle-deals.liquid) */
 .ag-bundles {
@@ -813,10 +847,13 @@
 @media (max-width: 989px) {
   .ag-offer__container {
     grid-template-columns: 1fr;
-    gap: 30px;
+    gap: 20px;
   }
   .ag-offer__media {
     order: -1;
+    position: relative !important;
+    top: 0 !important;
+    margin-bottom: 10px;
   }
 }
 
@@ -1102,6 +1139,7 @@
 .ag-offer__media {
   position: sticky;
   top: 20px;
+  z-index: 10;
 }
 
 .ag-offer__gallery-main {
